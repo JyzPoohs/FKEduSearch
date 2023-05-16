@@ -44,7 +44,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label">Input Time</label>
+                                    <label for="example-text-input" class="form-control-label">Select</label>
                                     <select class="form-select">
                                         <option selected>Open this select menu</option>
                                         <option value="1">One</option>
