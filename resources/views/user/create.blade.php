@@ -32,6 +32,18 @@
                                         <input class="form-control" type="email" name="email">
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">User Role <span
+                                                class="text-danger">*</span></label>
+                                        <select class="form-select" name="ref_role_id">
+                                            <option>Select Role</option>
+                                            @foreach ($roles as $role)
+                                                <option value="{{ $role->id }}">{{ $role->value }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                             <div class="text-end mt-2">
                                 <button onclick="history.back()" class="btn btn-secondary btn-md ms-auto">Back</button>
