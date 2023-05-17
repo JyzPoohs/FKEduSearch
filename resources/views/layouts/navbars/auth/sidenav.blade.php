@@ -11,7 +11,7 @@
     <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
-            @if (auth()->user()->ref_role_id == 1)
+            @if (auth()->user()->ref_role_id == 8)
                 <li class="nav-item">
                     <a class="nav-link {{ Route::currentRouteName() == 'post.index' ? 'active' : '' }}"
                         href="{{ route('post.index') }}">
@@ -22,7 +22,7 @@
                         <span class="nav-link-text ms-1">Discussion Board</span>
                     </a>
                 </li>
-            @elseif(auth()->user()->ref_role_id == 2)
+            @elseif(auth()->user()->ref_role_id == 9)
             @else
             @endif
             <li class="nav-item mt-3">
