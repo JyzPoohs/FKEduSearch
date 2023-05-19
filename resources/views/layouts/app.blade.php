@@ -43,7 +43,7 @@
             @if (
                 !in_array(request()->route()->getName(),
                     ['profile', 'profile-static']))
-                <div class="min-height-300 position-absolute w-100" style="background-color: #235391"></div>
+                <div class="min-height-300 position-absolute w-100"></div>
             @elseif (in_array(request()->route()->getName(),
                     ['profile-static', 'profile']))
                 <div class="position-absolute w-100 min-height-300 top-0"
