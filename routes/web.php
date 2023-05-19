@@ -10,6 +10,7 @@ use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ComplaintController;
 use Illuminate\Support\Facades\URL;
 
 /*
@@ -39,6 +40,7 @@ Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', UserController::class);
+    Route::resource('complaint', ComplaintController::class);
     Route::resource('post', PostController::class);
     Route::resource('like', LikeController::class);
     Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
