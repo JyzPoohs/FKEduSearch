@@ -38,8 +38,8 @@
                                 </div>
                             </div>
                             <div class="text-end mt-2">
-                                <button onclick="history.back()" class="btn btn-secondary btn-md ms-auto">Back</button>
-                                <button class="btn btn-success btn-md ms-auto">Save</button>
+                                <a href="{{ route('user.index') }}" class="btn btn-secondary btn-md ms-auto">Back</a>
+                                <button type="submit" class="btn btn-success btn-md ms-auto">Save</button>
                             </div>
                         </form>
                     </div>
