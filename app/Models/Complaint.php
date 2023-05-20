@@ -9,6 +9,9 @@ class Complaint extends Model
 {
     use HasFactory;
 
+    public $incrementing = false;
+    protected $keyType = 'string';
+
     protected $fillable = [
         'user_id',
         'post_id',
@@ -17,24 +20,16 @@ class Complaint extends Model
         'ref_complaint_status_id',
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    protected $hidden = [
+        'remember_token',
+    ];
 
-    public function post()
-    {
-        return $this->belongsTo(Post::class);
-    }
+    protected $casts = [
+        'complaint_created_at' => 'datetime',
+    ];
 
-    public function complaintType()
+    public function type()
     {
         return $this->belongsTo(Reference::class, 'ref_complaint_type_id');
     }
-
-    public function complaintStatus()
-    {
-        return $this->belongsTo(Reference::class, 'ref_complaint_status_id');
-    }
-
 }
