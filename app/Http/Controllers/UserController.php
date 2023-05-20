@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\Reference;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -22,9 +23,9 @@ class UserController extends Controller
         return view('user.edit', compact('data'));
     }
 
-    public function destroy($property)
+    public function destroy($user)
     {
-        User::find($property)->delete();
+        User::find($user)->delete();
 
         return response()->json(['success' => true]);
     }
@@ -48,11 +49,27 @@ class UserController extends Controller
             ->with('success', "User Successfully Added");
     }
 
-    public function update(Request $request, $property)
+    public function update(Request $request, $user)
     {
-        User::find($property)->update($request->all());
+        User::find($user)->update($request->all());
 
         return redirect()->route('user.index')
             ->with('success', "User Successfully Updated");
+    }
+
+    public function profile()
+    {
+        $user = User::find(auth()->user()->id);
+
+        return view('module2.user-profile-edit', compact('user'));
+    }
+
+    public function profileUpdate(Request $request)
+    {
+        $user = User::find(auth()->user()->id);
+
+        $user->update($request->all());
+
+        return view('module2.user-profile-edit', compact('user'));
     }
 }

@@ -22,6 +22,12 @@ class User extends Authenticatable
         'email',
         'password',
         'ref_role_id',
+        'current_academic_status',
+        'is_approved',
+        'fb_acc',
+        'linkedin_acc',
+        'area_of_research',
+        'avatar',
     ];
 
     /**
@@ -56,11 +62,16 @@ class User extends Authenticatable
 
     public function likes()
     {
-        return $this->hasMany(Like::class, 'user_id');
+        return $this->hasManyThrough(Like::class, Post::class);
     }
 
     public function role()
     {
         return $this->belongsTo(Reference::class, 'ref_role_id');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'user_id');
     }
 }
