@@ -30,8 +30,14 @@ class DatabaseSeeder extends Seeder
                 'ref_role_id' => 10,
             ],
             [
-                'name' => 'User',
-                'email' => 'user@example.com',
+                'name' => 'User 1',
+                'email' => 'user.1@example.com',
+                'password' => bcrypt('password'),
+                'ref_role_id' => 8,
+            ],
+            [
+                'name' => 'User 2',
+                'email' => 'user.2@example.com',
                 'password' => bcrypt('password'),
                 'ref_role_id' => 8,
             ],

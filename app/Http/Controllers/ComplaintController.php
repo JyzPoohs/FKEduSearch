@@ -35,9 +35,4 @@ class ComplaintController extends Controller
 
         return response()->json(['success' => true]);
     }
-
-    public function type()
-    {
-        return $this->belongsTo(Reference::class, 'roles');
-    }
 }

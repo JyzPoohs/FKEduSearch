@@ -39,6 +39,8 @@ Route::get('/change-password', [ChangePassword::class, 'show'])->middleware('gue
 Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::post('/user/profile-update', [UserController::class, 'profileUpdate'])->name('user.profile-update');
     Route::resource('user', UserController::class);
     Route::resource('complaint', ComplaintController::class);
     Route::resource('post', PostController::class);

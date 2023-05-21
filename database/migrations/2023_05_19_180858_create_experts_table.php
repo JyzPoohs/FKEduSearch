@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_details', function (Blueprint $table) {
+        Schema::create('experts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->string('area_of_research')->nullable();
-            $table->string('current_academic_status')->nullable();
-            $table->string('linkedin_acc')->nullable();
-            $table->string('fb_acc')->nullable();
-            $table->integer('is_approved')->default(0);
+            $table->foreignId('ref_category_id');
+            $table->string('cv_upload')->nullable();
+            $table->foreignId('ref_expert_status');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_details');
+        Schema::dropIfExists('experts');
     }
 };

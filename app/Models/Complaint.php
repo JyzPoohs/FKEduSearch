@@ -13,8 +13,10 @@ class Complaint extends Model
     protected $keyType = 'string';
 
     protected $fillable = [
-        'description',
+        'user_id',
+        'post_id',
         'ref_complaint_type_id',
+        'description',
         'ref_complaint_status_id',
     ];
 

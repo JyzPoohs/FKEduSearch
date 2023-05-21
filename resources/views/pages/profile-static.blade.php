@@ -7,7 +7,18 @@
             <div class="row gx-4">
                 <div class="col-auto">
                     <div class="avatar avatar-xl position-relative">
-                        <img src="/img/team-1.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                        <div>
+                            <label for="file-input"
+                                class="btn btn-sm btn-icon-only bg-gradient-light position-absolute bottom-0 end-0 mb-n2 me-n2">
+                                <i class="fa fa-pen top-0" data-bs-toggle="tooltip" data-bs-placement="top" title=""
+                                    aria-hidden="true" data-bs-original-title="Edit Image" aria-label="Edit Image"></i>
+                                <span class="sr-only">Edit Image</span>
+                            </label>
+                            <span class="h-12 w-12 rounded-full overflow-hidden bg-gray-100">
+                                <img src="https://argon-dashboard-pro-laravel.creative-tim.com/avatars/team-1.jpg"
+                                    alt="bruce" class="w-100 border-radius-lg shadow-sm">
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-auto my-auto">
@@ -52,6 +63,7 @@
     </div>
     <div class="container-fluid py-4">
         <div class="row">
+            <input type="file" name="avatar" id="file-input" accept="image/*" class="d-none">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header pb-0">
