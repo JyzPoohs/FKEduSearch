@@ -72,4 +72,9 @@ class UserController extends Controller
 
         return view('module2.user-profile-edit', compact('user'));
     }
+
+    public function show()
+    {
+        return view('module1.viewUser');
+    }
 }
