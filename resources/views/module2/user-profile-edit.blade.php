@@ -36,9 +36,11 @@
             </div>
         </div>
     </div>
-    {{-- <div id="alert">
-        @include('components.alert')
-    </div> --}}
+    @if (session()->has('success'))
+        <div id="alert">
+            @include('components.alert')
+        </div>
+    @endif
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-md-8">
@@ -125,7 +127,7 @@
                                         @if (auth()->user()->posts->count() > 0)
                                             Last posted on
                                             <span
-                                                class="text-success text-sm font-weight-bolder">{{ auth()->user()->posts->last()->created_at }}.</span>
+                                                class="text-primary text-sm font-weight-bolder">{{ auth()->user()->posts->last()->created_at }}.</span>
                                         @else
                                             No post yet.
                                         @endif
@@ -153,7 +155,7 @@
                                         @if (auth()->user()->likes->count() > 0)
                                             Recent likes received on
                                             <span
-                                                class="text-success text-sm font-weight-bolder">{{ auth()->user()->likes->last()->created_at }}</span>
+                                                class="text-primary text-sm font-weight-bolder">{{ auth()->user()->likes->last()->created_at }}</span>
                                         @else
                                             No post yet.
                                         @endif
