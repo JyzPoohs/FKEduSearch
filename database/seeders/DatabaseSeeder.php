@@ -150,6 +150,38 @@ class DatabaseSeeder extends Seeder
                 'code' => 3,
                 'value' => 'admin',
             ],
+            //complaint-type
+            [
+                'name' => 'complaint-type',
+                'code' => 1,
+                'value' => 'Unsatisfied Expert Feedback',
+            ],
+            [
+                'name' => 'complaint-type',
+                'code' => 2,
+                'value' => 'Wrongly Assigned Research Area',
+            ],
+            [
+                'name' => 'complaint-type',
+                'code' => 3,
+                'value' => 'Inapproriate Feedback',
+            ],
+            //complaint-status
+            [
+                'name' => 'complaint-status',
+                'code' => 1,
+                'value' => 'In Investigation',
+            ],
+            [
+                'name' => 'complaint-status',
+                'code' => 2,
+                'value' => 'On Hold',
+            ],
+            [
+                'name' => 'complaint-status',
+                'code' => 3,
+                'value' => 'Resolved',
+            ],
         ];
 
         foreach ($datas as $data) {

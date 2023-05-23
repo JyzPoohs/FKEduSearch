@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Create User'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Discussion Board'])
     <div class="container-fluid py-4">
         <div class="row mt-4">
             <div class="col-lg-12 mb-lg-0 mb-4">
@@ -52,7 +52,7 @@
                                         </div>
                                     </div>
                                     <div class="text-end mt-2">
-                                        <button class="btn btn-success btn-md ms-auto">Post</button>
+                                        <button class="btn btn-primary btn-md ms-auto">Post</button>
                                     </div>
                                 </form>
                             </div>
@@ -62,7 +62,9 @@
                                 <div class="card-header d-flex justify-content-between">
                                     <h6>{{ $data['title'] }}</h6>
                                     <small class="mb-0 text-small text-bold">
-                                        #{{ $data['category']['value'] }} | {{ $data['user']['name'] }} |
+                                        #{{ $data['category']['value'] }} | <a
+                                            href="{{ route('user.profile-view', ['id' => $data['user_id']]) }}">{{ $data['user']['name'] }}</a>
+                                        |
                                         {{ $data['created_at'] }}
                                     </small>
                                 </div>
@@ -75,6 +77,7 @@
                                             <div class="d-flex justify-content-between">
                                                 <h6>Answer</h6>
                                                 <small class="mb-0 text-small text-bold">
+                                                    <i class="fa fa-flag" aria-hidden="true"></i>
                                                     {{ $data['expert']['name'] }}
                                                 </small>
                                             </div>
@@ -82,13 +85,55 @@
                                         </div>
                                     @endif
                                 </div>
-                                <div class="card-footer d-flex justify-content-end">
-                                    <span class="me-2 text-bold" style="font-size: 14px">{{ $data->likes->count() }}</span>
-                                    <a href="{{ route('like.store', ['post_id' => $data['id']]) }}">
-                                        <i class="ni ni-favourite-28 text-primary text-lg opacity-10"></i>
-                                    </a>
-                                    &nbsp;&nbsp;&nbsp;
-                                    <i class="ni ni-chat-round text-primary text-lg opacity-10"></i>
+                                <div class="card-footer">
+                                    <div class="d-flex justify-content-end">
+                                        <span class="me-2 text-bold"
+                                            style="font-size: 14px">{{ $data->likes->count() }}</span>
+                                        <a
+                                            @if (auth()->user()->id != $data['user_id']) href="{{ route('like.index', ['post_id' => $data['id']]) }}" @endif>
+                                            <i class="ni ni-favourite-28 text-primary text-lg opacity-10"></i>
+                                        </a>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <span class="me-2 text-bold"
+                                            style="font-size: 14px">{{ $data->comments->count() }}</span>
+                                        <i class="ni ni-chat-round text-primary text-lg opacity-10"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#collapseComment-{{ $data['id'] }}"></i>
+                                    </div>
+                                    <div class="collapse mb-3" id="collapseComment-{{ $data['id'] }}">
+                                        <hr class="horizontal dark">
+                                        <h6 class="mb-3">Comments</h6>
+                                        @foreach ($data->comments as $comment)
+                                            <div class="mb-3">
+                                                <div class="d-flex justify-content-between">
+                                                    <label for="example-text-input"
+                                                        class="form-control-label">{{ $comment->user->name }}</label>
+                                                    <small class="mb-0 text-small text-bold">
+                                                        {{ $comment->created_at }}
+                                                    </small>
+                                                </div>
+                                                <span class="text-bold text-sm ms-1">{{ $comment->comment }}</span>
+                                                <hr>
+                                            </div>
+                                        @endforeach
+                                        <form role="form" method="POST" action={{ route('comment.store') }}
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            <input type="hidden" name="post_id" value="{{ $data['id'] }}">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="example-text-input" class="form-control-label">Add a
+                                                            comment</label>
+                                                        <textarea class="form-control" cols="30" rows="3" name="comment"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-end mt-2">
+                                                <button class="btn btn-primary btn-sm ms-auto">Send</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         @endforeach

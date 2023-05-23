@@ -7,6 +7,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
@@ -40,11 +41,13 @@ Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::get('/user/profile/{id}', [UserController::class, 'profileView'])->name('user.profile-view');
     Route::post('/user/profile-update', [UserController::class, 'profileUpdate'])->name('user.profile-update');
     Route::resource('user', UserController::class);
     Route::resource('complaint', ComplaintController::class);
     Route::resource('post', PostController::class);
     Route::resource('like', LikeController::class);
+    Route::resource('comment', CommentController::class);
     Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
     Route::get('/form-example', [HomeController::class, 'formExample'])->name('form-example');
     Route::get('/{page}', [PageController::class, 'index'])->name('page');

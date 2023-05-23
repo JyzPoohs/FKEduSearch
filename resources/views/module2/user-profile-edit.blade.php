@@ -157,7 +157,7 @@
                                             <span
                                                 class="text-primary text-sm font-weight-bolder">{{ auth()->user()->likes->last()->created_at }}</span>
                                         @else
-                                            No post yet.
+                                            No likes received yet.
                                         @endif
                                     </p>
                                 </div>

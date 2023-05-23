@@ -64,6 +64,13 @@ class UserController extends Controller
         return view('module2.user-profile-edit', compact('user'));
     }
 
+    public function profileView($id)
+    {
+        $user = User::with(['role', 'posts', 'likes'])->find($id);
+
+        return view('module2.user-profile-view', compact('user'));
+    }
+
     public function profileUpdate(Request $request)
     {
         $user = User::find(auth()->user()->id);
