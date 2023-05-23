@@ -79,4 +79,9 @@ class UserController extends Controller
 
         return redirect()->back()->with('success', "Profile Successfully Updated!");
     }
+
+    public function show()
+    {
+        return view('module1.viewUser');
+    }
 }
