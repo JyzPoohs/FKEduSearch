@@ -70,7 +70,7 @@ class UserController extends Controller
 
         $user->update($request->all());
 
-        return view('module2.user-profile-edit', compact('user'));
+        return redirect()->back()->with('success', "Profile Successfully Updated!");
     }
 
     public function show()

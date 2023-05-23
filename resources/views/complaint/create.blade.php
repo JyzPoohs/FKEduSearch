@@ -12,7 +12,7 @@
                 @endif
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>Create User</h6>
+                        <h6>File Complaint</h6>
                     </div>
                     <div class="card-body p-3">
                         <form role="form" method="POST" action={{ route('user.store') }} enctype="multipart/form-data">
@@ -20,34 +20,44 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">User Name <span
+                                        <label for="example-text-input" class="form-control-label">Expert <span
                                                 class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="name">
+                                        <input class="form-control" type="text" name="name" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">User Email <span
+                                        <label for="example-text-input" class="form-control-label">Feedback Description<span
                                                 class="text-danger">*</span></label>
-                                        <input class="form-control" type="email" name="email">
+                                        <input class="form-control" type="email" name="email" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">User Role <span
+                                        <label for="example-text-input" class="form-control-label">Complaint Type<span
                                                 class="text-danger">*</span></label>
-                                        <select class="form-select" name="ref_role_id">
-                                            <option>Select Role</option>
-                                            @foreach ($roles as $role)
+                                        <select class="form-select" name="ref_complaint_type__id">
+                                            <option>Select Type</option>
+                                            <option value="">Unsatisfied Expert's Feedback</option>
+                                            {{-- @foreach ($roles as $role)
                                                 <option value="{{ $role->id }}">{{ $role->value }}</option>
-                                            @endforeach
+                                            @endforeach --}}
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Complaint Description <span
+                                                class="text-danger">*</span></label>
+                                        <input class="form-control" type="email" name="email"
+                                            value="{{--{{ $data['email'] }}--}}">
                                     </div>
                                 </div>
                             </div>
                             <div class="text-end mt-2">
                                 <button onclick="history.back()" class="btn btn-secondary btn-md ms-auto">Back</button>
-                                <button class="btn btn-success btn-md ms-auto">Save</button>
+                                <button class="btn btn-success btn-md ms-auto">Submit</button>
+                                <button class="btn btn-danger btn-md ms-auto">Clear</button>
                             </div>
                         </form>
                     </div>
