@@ -84,6 +84,9 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="text-end mt-2">
+                            <a href="{{ route('user.index') }}" class="btn btn-secondary btn-md ms-auto">Back</a>
+                        </div>
                     </div>
                 </div>
             </div>
