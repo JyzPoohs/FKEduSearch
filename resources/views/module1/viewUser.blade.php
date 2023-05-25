@@ -14,71 +14,76 @@
                     <div class="card-header pb-0 d-flex justify-content-between">
                         <h5>User details</h5>
 
-                        {{-- <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            Add new post
-                        </button> --}}
+
                     </div>
                     <div class="card-body p-3">
                         <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Name </label>
-                                        <input class="form-control" type="text" disabled name="name"
-                                            value="bbcc">
-                                    </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Name <span
+                                            class="text-danger">*</span></label>
+                                    <input class="form-control" type="text" name="name"
+                                        value="{{ $data['name'] }}" disabled>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Email </label>
-                                        <input class="form-control" type="text" disabled name="email"
-                                            value="aabb">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Academic Status</label>
-                                        <input class="form-control" type="text" disabled name="academic status"
-                                            value="bbcc">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Facebook</label>
-                                        <input class="form-control" type="text" disabled name="facebook"
-                                            value="aabb">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Area of Research</label>
-                                        <input class="form-control" type="text" disabled name="researchArea"
-                                            value="bbcc">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Role</label>
-                                        <input class="form-control" type="text" disabled name="role"
-                                            value="aabb">
-                                    </div>
-                                </div>
-                                {{-- <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Acedemic Status</label>
-                                        <input class="form-control" type="text" disabled name="name"
-                                            value="bbcc">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Facebook</label>
-                                        <input class="form-control" type="text" disabled name="email"
-                                            value="aabb">
-                                    </div>
-                                </div> --}}
                             </div>
-                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Email <span
+                                            class="text-danger">*</span></label>
+                                    <input class="form-control" type="email" name="email"
+                                        value="{{ $data['email'] }}" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Academic Status <span
+                                            class="text-danger">*</span></label>
+                                    <input class="form-control" type="text" name="current_academic_status"
+                                        value="{{ $data['current_academic_status'] }}" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Facebook
+                       
+                                        </label>
+                                    <input class="form-control" type="text" name="fb_acc"
+                                        value="{{ $data['fb_acc'] }}" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Linkedin
+           
+                                        </label>
+                                    <input class="form-control" type="text" name="linkedin_acc"
+                                        value="{{ $data['linkedin_acc'] }}" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Area of Research
+                                        <span class="text-danger">*</span></label>
+                                    <input class="form-control" type="text" name="area_of_research"
+                                        value="{{ $data['area_of_research'] }}" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Role
+                                        {{-- <span class="text-danger">*</span> --}}
+                                    </label>
+                                        <input class="form-control" type="text" name="ref_role_id"
+                                        value="{{ $role->first()->value}}" disabled>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

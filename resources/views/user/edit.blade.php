@@ -42,52 +42,55 @@
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Academic Status <span
                                                 class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="academic status"
-                                            value="{{ $data['name'] }}">
+                                        <input class="form-control" type="text" name="current_academic_status"
+                                            value="{{ $data['current_academic_status'] }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Facebook<span
-                                                class="text-danger">*</span></label>
-                                        <input class="form-control" type="email" name="facebook"
-                                            value="{{ $data['email'] }}">
+                                        <label for="example-text-input" class="form-control-label">Facebook
+                                            {{-- <span class="text-danger">*</span> --}}
+                                            </label>
+                                        <input class="form-control" type="text" name="fb_acc"
+                                            value="{{ $data['fb_acc'] }}">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Linkedin <span
-                                                class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="linkedin"
-                                            value="{{ $data['name'] }}">
+                                        <label for="example-text-input" class="form-control-label">Linkedin
+                                            {{-- <span    class="text-danger">*</span> --}}
+                                            </label>
+                                        <input class="form-control" type="text" name="linkedin_acc"
+                                            value="{{ $data['linkedin_acc'] }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Area of Research
                                             <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="email" name="research area"
-                                            value="{{ $data['email'] }}">
+                                        <input class="form-control" type="text" name="area_of_research"
+                                            value="{{ $data['area_of_research'] }}">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Password <span
                                                 class="text-danger">*</span></label>
                                         <input class="form-control" type="text" name="password"
-                                            value="{{ $data['name'] }}">
-                                    </div>
-                                </div>
+                                            value="{{ $data['password'] }}">
+                                    </div> --}}
+                                {{-- </div> --}}
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Role
-                                            <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="email" name="role"
-                                            value="{{ $data['email'] }}">
+                                            {{-- <span class="text-danger">*</span> --}}
+                                        </label>
+                                            <input class="form-control" type="text" name="ref_role_id"
+                                            value="{{ $role->first()->value}}" disabled>
                                     </div>
                                 </div>
                             </div>

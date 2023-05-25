@@ -32,6 +32,40 @@
                                         <input class="form-control" type="email" name="email">
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="example-text-input" class="form-control-label">Academic Status
+                                                <span class="text-danger">*</span></label>
+                                            <input class="form-control" type="text" name="current_academic_status">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="example-text-input" class="form-control-label">Facebook
+                                                {{-- <span class="text-danger">*</span> --}}
+                                                </label>
+                                            <input class="form-control" type="text" name="fb_acc">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="example-text-input" class="form-control-label">Linkedin
+                                                {{-- <span    class="text-danger">*</span> --}}
+                                                </label>
+                                            <input class="form-control" type="text" name="linkedin_acc">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="example-text-input" class="form-control-label">Area of Research
+                                                <span class="text-danger">*</span></label>
+                                            <input class="form-control" type="text" name="area_of_research">
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">User Role <span

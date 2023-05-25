@@ -19,8 +19,11 @@ class UserController extends Controller
     public function edit($id)
     {
         $data = User::find($id)->toArray();
+        $role = Reference::where('code',$data['ref_role_id'])
+        ->where('name', 'roles')
+        ->get();
 
-        return view('user.edit', compact('data'));
+        return view('user.edit', compact('data','role'));
     }
 
     public function destroy($user)
@@ -80,8 +83,12 @@ class UserController extends Controller
         return redirect()->back()->with('success', "Profile Successfully Updated!");
     }
 
-    public function show()
+    public function show($id)
     {
-        return view('module1.viewUser');
+        $data = User::find($id)->toArray();
+        $role = Reference::where('code',$data['ref_role_id'])->get();
+
+        return view('module1.viewUser', compact('data','role'));
+        // return view('module1.viewUser');
     }
 }
