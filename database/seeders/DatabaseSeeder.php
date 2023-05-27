@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 
 class DatabaseSeeder extends Seeder
@@ -13,11 +14,14 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
+
+    
     public function run()
     {
         $this->registerUser();
         $this->registerPost();
         $this->registerReference();
+        User::factory()->count(20)->create();
     }
 
     public function registerUser()
@@ -137,17 +141,17 @@ class DatabaseSeeder extends Seeder
             //roles
             [
                 'name' => 'roles',
-                'code' => 1,
+                'code' => 8,
                 'value' => 'user',
             ],
             [
                 'name' => 'roles',
-                'code' => 2,
+                'code' => 9,
                 'value' => 'expert',
             ],
             [
                 'name' => 'roles',
-                'code' => 3,
+                'code' => 10,
                 'value' => 'admin',
             ],
             //complaint-type

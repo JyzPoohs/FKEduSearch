@@ -1,8 +1,94 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Manage Users'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Reports'])
     <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body p-3 d-flex flex-column justify-content-between">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total User</p>
+                                    <h5 class="font-weight-bolder">
+                                        {{$report['Total Users']}}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow-success text-center rounded-circle">
+                                    <i class="fas fa-users" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body p-3 d-flex flex-column justify-content-between">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Active User</p>
+                                    <h5 class="font-weight-bolder">
+                                        {{$report['Active Users']}}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
+                                    <i class="fas fa-user" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body p-3 d-flex flex-column justify-content-between">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Experts</p>
+                                    <h5 class="font-weight-bolder">
+                                        {{$report['Total Experts']}}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
+                                    <i class="fas fa-user-tie" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body p-3 d-flex flex-column justify-content-between">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Percentage Active</p>
+                                    <h5 class="font-weight-bolder">
+                                        {{$report['Percentage Active']}}%
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
+                                    <i class="fas fa-percentage" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row mt-4">
             <div class="col-lg-12 mb-lg-0 mb-4">
                 @if (session()->has('success'))
@@ -12,14 +98,7 @@
                 @endif
                 <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between mb-3">
-                        <h6>User List</h6>
-                        <div class="btn-group">
-                            <a href="{{ route('user.create') }}" class="btn btn-success btn-sm float-end mb-0 rounded">Add
-                                User</a>
-                            <a href="{{ route('user.report') }}" class="btn btn-info btn-sm float-end mb-0 ms-4 rounded">User
-                                Report</a>
-
-                        </div>
+                        <h6>User Activity</h6>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
@@ -42,7 +121,7 @@
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Action</th>
+                                            Last Login</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -68,16 +147,8 @@
                                                 </td>
                                                 <td class="align-middle text-end">
                                                     <div class="d-flex px-3 py-1 justify-content-center align-items-center">
-                                                        <a class="text-info me-3"
-                                                            href="{{ route('user.show', ['user' => $data['id']]) }}"><i
-                                                                class="fas fa-eye fa-lg" aria-hidden="true"></i></a>
-                                                        <a class="text-success me-3"
-                                                            href="{{ route('user.edit', ['user' => $data['id']]) }}"><i
-                                                                class="fa fa-pencil-square-o fa-lg"
-                                                                aria-hidden="true"></i></a>
-                                                        <a class="text-danger" href="#"
-                                                            onclick="deleteRecord('{{ route('user.destroy', ['user' => $data['id']]) }}')"><i
-                                                                class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a>
+                                                        <p class="text-sm font-weight-bold mb-0">
+                                                            {{ $data['last_login'] }}</p>
                                                     </div>
                                                 </td>
                                             </tr>

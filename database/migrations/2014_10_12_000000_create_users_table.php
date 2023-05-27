@@ -26,6 +26,7 @@ return new class extends Migration
             $table->text('area_of_research')->nullable();
             $table->text('avatar')->nullable();
             $table->rememberToken();
+            $table->timestamp('last_login')->nullable();
             $table->timestamps();
         });
     }

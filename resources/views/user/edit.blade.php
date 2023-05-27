@@ -25,7 +25,7 @@
                                         <label for="example-text-input" class="form-control-label">Name <span
                                                 class="text-danger">*</span></label>
                                         <input class="form-control" type="text" name="name"
-                                            value="{{ $data['name'] }}">
+                                            value="{{ $data['name'] }}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -33,7 +33,7 @@
                                         <label for="example-text-input" class="form-control-label">Email <span
                                                 class="text-danger">*</span></label>
                                         <input class="form-control" type="email" name="email"
-                                            value="{{ $data['email'] }}">
+                                            value="{{ $data['email'] }}" required>
                                     </div>
                                 </div>
                             </div>

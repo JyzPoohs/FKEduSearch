@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Carbon;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -28,6 +30,14 @@ class LoginController extends Controller
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
+
+            $user = User::where('email', $request->email)->first();
+            #dd($user);
+            $current = Carbon::now();
+            $user->timestamps = false;
+            $user->last_login = $current;
+            $user->save();
+            $user->timestamps = true;
 
             if (Auth::user()->role->value == 'user') {
                 return redirect()->route('user.profile');

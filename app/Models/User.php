@@ -28,6 +28,7 @@ class User extends Authenticatable
         'linkedin_acc',
         'area_of_research',
         'avatar',
+        'last_login',
     ];
 
     /**

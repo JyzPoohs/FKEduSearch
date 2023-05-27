@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Reference;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+
 
 class UserController extends Controller
 {
@@ -19,11 +21,11 @@ class UserController extends Controller
     public function edit($id)
     {
         $data = User::find($id)->toArray();
-        $role = Reference::where('code',$data['ref_role_id'])
-        ->where('name', 'roles')
-        ->get();
+        $role = Reference::where('code', $data['ref_role_id'])
+            ->where('name', 'roles')
+            ->get();
 
-        return view('user.edit', compact('data','role'));
+        return view('user.edit', compact('data', 'role'));
     }
 
     public function destroy($user)
@@ -43,7 +45,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->merge([
-            'password' => bcrypt('password')
+            'password' => 'password'
         ]);
 
         User::create($request->all());
@@ -86,9 +88,41 @@ class UserController extends Controller
     public function show($id)
     {
         $data = User::find($id)->toArray();
-        $role = Reference::where('code',$data['ref_role_id'])->get();
+        $role = Reference::where('code', $data['ref_role_id'])->get();
 
-        return view('module1.viewUser', compact('data','role'));
-        // return view('module1.viewUser');
+        return view('module1.viewUser', compact('data', 'role'));
+        #return view('module1.viewUser');
+    }
+
+    public function report()
+    {
+        #Retrieve the necessary data
+        $datas = User::whereNotNull('last_login')
+        ->orderBy('last_login','desc')
+        ->paginate(10);
+        $users = User::whereNotNull('last_login')->get();
+        
+        
+        $datas;
+
+        #Set the time range for active users (e.g., last 30 days)
+        $timeRange = Carbon::now()->subDays(30);
+
+        # Calculate KPI metrics
+        $totalExperts = $users->where('ref_role_id', 9)->count();
+        $totalUsers = $users->count();
+        $activeUsers = $users->where('last_login', '>=', $timeRange)->count();
+        $percentageActive = number_format((($activeUsers / $totalUsers) * 100),2);
+
+        # Generate the KPI report
+        $report = [
+            'Total Experts' => $totalExperts,
+            'Total Users' => $totalUsers,
+            'Active Users' => $activeUsers,
+            'Percentage Active' => $percentageActive,
+        ];
+
+        # Pass the report data to a view for rendering
+        return view('module1.report', compact('datas', 'report'));
     }
 }
