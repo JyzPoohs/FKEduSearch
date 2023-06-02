@@ -15,11 +15,12 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
 
-    
+
     public function run()
     {
         $this->registerUser();
         $this->registerPost();
+        $this->registerComplaint();
         $this->registerReference();
         User::factory()->count(20)->create();
     }
@@ -95,6 +96,34 @@ class DatabaseSeeder extends Seeder
 
         foreach ($datas as $data) {
             DB::table('posts')->insert($data);
+        }
+    }
+
+    public function registerComplaint()
+    {
+        $datas = [
+            [
+                'user_id' => 21,
+                'post_id' => 2,
+                'ref_complaint_type_id' => 11,
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod.',
+                'ref_complaint_status_id' => 15,
+                'created_at' => '2023-05-16 15:23:54.000'
+            ],
+            [
+                'user_id' => 24,
+                'post_id' => 1,
+                'ref_complaint_type_id' => 12,
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod tempor.',
+                'ref_complaint_status_id' => 16,
+                'created_at' => '2023-05-17 15:23:54.000'
+            ],
+        ];
+
+        foreach ($datas as $data) {
+            DB::table('complaints')->insert($data);
         }
     }
 

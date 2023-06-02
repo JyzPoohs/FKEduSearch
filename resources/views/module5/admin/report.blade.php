@@ -10,15 +10,15 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total User</p>
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Complaint</p>
                                     <h5 class="font-weight-bolder">
-                                        {{ $report['Total Users'] }}
+                                        {{ $report['Total Complaint'] }}
                                     </h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
                                 <div class="icon icon-shape bg-gradient-primary shadow-success text-center rounded-circle">
-                                    <i class="fas fa-users" aria-hidden="true"></i>
+                                    <i class="fas fa-chart-bar" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>
@@ -31,15 +31,15 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Active User</p>
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Unsatisfied Expert Feedback</p>
                                     <h5 class="font-weight-bolder">
-                                        {{ $report['Active Users'] }}
+                                        {{ $report['Unsatisfied Complaints'] }}
                                     </h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
                                 <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
-                                    <i class="fas fa-user" aria-hidden="true"></i>
+                                    <i class="far fa-thumbs-down" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>
@@ -52,15 +52,16 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Experts</p>
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Wrongly Assigned Research Area
+                                    </p>
                                     <h5 class="font-weight-bolder">
-                                        {{ $report['Total Experts'] }}
+                                        {{ $report['Wrongly Assigned Complaints'] }}
                                     </h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
                                 <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
-                                    <i class="fas fa-user-tie" aria-hidden="true"></i>
+                                    <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>
@@ -73,15 +74,15 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Percentage Active</p>
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Inapproriate Complaint</p>
                                     <h5 class="font-weight-bolder">
-                                        {{ $report['Percentage Active'] }}%
+                                        {{ $report['Inappropriate Complaints'] }}
                                     </h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
                                 <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                                    <i class="fas fa-percentage" aria-hidden="true"></i>
+                                    <i class="fas fa-flag" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>
@@ -98,7 +99,7 @@
                 @endif
                 <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between mb-3">
-                        <h6>User Activity</h6>
+                        <h6>Complaint List</h6>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
@@ -113,21 +114,30 @@
                                         </th>
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Email
+                                            Complaint Type
                                         </th>
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Role
+                                            Description
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Last Login</th>
+                                            Date
+                                        </th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Time
+                                        </th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Status
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (!$datas->isEmpty())
+                                    @if (!$complaints->isEmpty())
                                         @php $counter = 0; @endphp
-                                        @foreach ($datas as $data)
+                                        @foreach ($complaints as $complaint)
                                             @php $counter++; @endphp
                                             <tr>
                                                 <td>
@@ -135,21 +145,27 @@
                                                 </td>
                                                 <td>
                                                     <p class="text-sm font-weight-bold mb-0">
-                                                        {{ $data['name'] }}</p>
+                                                        {{ $complaint->user->name }}</p>
                                                 </td>
                                                 <td>
                                                     <p class="text-sm font-weight-bold mb-0">
-                                                        {{ $data['email'] }}</p>
+                                                        {{ $complaint->type->value }}</p>
                                                 </td>
                                                 <td>
                                                     <p class="text-sm font-weight-bold mb-0">
-                                                        {{ $data['role']['value'] }}</p>
+                                                        {{ $complaint->description }}</p>
                                                 </td>
-                                                <td class="align-middle text-end">
-                                                    <div class="d-flex px-3 py-1 justify-content-center align-items-center">
-                                                        <p class="text-sm font-weight-bold mb-0">
-                                                            {{ $data['last_login'] }}</p>
-                                                    </div>
+                                                <td>
+                                                    <p class="text-sm font-weight-bold mb-0">
+                                                        {{ $complaint->created_at }}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-sm font-weight-bold mb-0">
+                                                        {{ $complaint->created_at }}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-sm font-weight-bold mb-0">
+                                                        {{ $complaint->status->value }}</p>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -164,12 +180,10 @@
                                     @endif
                                 </tbody>
                             </table>
-                            <div class="px-3 pt-4">
-                                {{ $datas->links() }}
-                            </div>
                         </div>
                     </div>
                 </div>
+                <a class="btn btn-primary col-sm-1 offset-md-10" href="{{ route('complaint.index') }}">Back</a>
             </div>
         </div>
         @include('layouts.footers.auth.footer')
