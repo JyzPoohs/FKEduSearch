@@ -77,7 +77,9 @@
                                             <div class="d-flex justify-content-between">
                                                 <h6>Answer</h6>
                                                 <small class="mb-0 text-small text-bold">
-                                                    <i class="fa fa-flag" aria-hidden="true"></i>
+                                                    <a href="{{ route('complaint.create') }}">
+                                                        <i class="fa fa-flag" aria-hidden="true"></i>
+                                                    </a>
                                                     {{ $data['expert']['name'] }}
                                                 </small>
                                             </div>
@@ -123,8 +125,7 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="example-text-input" class="form-control-label">Add a
-                                                            comment</label>
+                                                        <label for="example-text-input" class="form-control-label">Add a comment</label>
                                                         <textarea class="form-control" cols="30" rows="3" name="comment"></textarea>
                                                     </div>
                                                 </div>

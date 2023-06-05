@@ -89,8 +89,25 @@ class DatabaseSeeder extends Seeder
                     in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                     Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
                     deserunt mollit anim id est laborum.',
+                'accepted_by' => 7,
                 'ref_post_status_id' => 1,
                 'created_at' => '2023-05-16 15:24:54.000'
+            ],
+            [
+                'user_id' => 20,
+                'ref_category_id' => 2,
+                'title' => 'Post 3',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                    enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea.',
+                'accepted_by' => 18,
+                'answer' => 'Duis aute irure dolor in reprehenderit
+                    in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                    deserunt mollit anim id est laborum.',
+                'ref_post_status_id' => 4,
+                'created_at' => '2023-06-06 15:24:54.000'
             ],
         ];
 
@@ -103,22 +120,28 @@ class DatabaseSeeder extends Seeder
     {
         $datas = [
             [
-                'user_id' => 21,
+                'user_id' => 2,
                 'post_id' => 2,
                 'ref_complaint_type_id' => 11,
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod.',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.',
                 'ref_complaint_status_id' => 15,
                 'created_at' => '2023-05-16 15:23:54.000'
             ],
             [
-                'user_id' => 24,
+                'user_id' => 2,
                 'post_id' => 1,
                 'ref_complaint_type_id' => 12,
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor.',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
                 'ref_complaint_status_id' => 16,
                 'created_at' => '2023-05-17 15:23:54.000'
+            ],
+            [
+                'user_id' => 20,
+                'post_id' => 3,
+                'ref_complaint_type_id' => 13,
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                'ref_complaint_status_id' => 14,
+                'created_at' => '2023-05-18 18:33:14.000'
             ],
         ];
 

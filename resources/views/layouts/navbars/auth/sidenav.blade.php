@@ -33,6 +33,16 @@
                         <span class="nav-link-text ms-1">Discussion Board</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::currentRouteName() == 'post.index' ? 'active' : '' }}"
+                        href="{{ route('complaint.index') }}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-chat-round text-primary text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Complaint Record</span>
+                    </a>
+                </li>
             @elseif(auth()->user()->ref_role_id == 9)
                 {{-- Expert menu --}}
             @else

@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Manage Complaint'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Complaint Record'])
     <div class="container-fluid py-4">
         <div class="row mt-4">
             <div class="col-lg-12 mb-lg-0 mb-4">
@@ -12,9 +12,7 @@
                 @endif
                 <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between mb-3">
-                        <h6>Complaint List</h6>
-                        <a href="{{ route('complaint.report') }}" class="btn btn-sm float-end mb-0"
-                            style="background-color: #57cc02;color:white">Report</a>
+                        <h6>Complaint Record</h6>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
@@ -22,10 +20,6 @@
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#
-                                        </th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Name
                                         </th>
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
@@ -49,7 +43,8 @@
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Action</th>
+                                            Action
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -60,10 +55,6 @@
                                             <tr>
                                                 <td>
                                                     <p class="text-sm font-weight-bold mb-0 ms-3">{{ $counter }}</p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-sm font-weight-bold mb-0">
-                                                        {{ $data->user->name }}</p>
                                                 </td>
                                                 <td>
                                                     <p class="text-sm font-weight-bold mb-0">
@@ -88,13 +79,9 @@
                                                 </td>
                                                 <td class="align-middle text-end">
                                                     <div class="d-flex px-3 py-1 justify-content-center align-items-center">
-                                                        <a class="text-success me-3"
+                                                        <a class="text-info me-3"
                                                             href="{{ route('complaint.show', ['complaint' => $data['id']]) }}"><i
-                                                                class="fa fa-pencil-square-o fa-lg"
-                                                                aria-hidden="true"></i></a>
-                                                        <a class="text-danger" href="#"
-                                                            onclick="deleteRecord('{{ route('complaint.destroy', ['complaint' => $data['id']]) }}')"><i
-                                                                class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a>
+                                                                class="fas fa-eye fa-lg" aria-hidden="true"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>

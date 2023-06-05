@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Reports'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Complaint Report'])
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-xl-3 col-md-6 mb-4">
@@ -116,7 +116,7 @@
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                             Complaint Type
                                         </th>
-                                        <th
+                                        <th style="width: 80px"
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                             Description
                                         </th>
@@ -152,16 +152,16 @@
                                                         {{ $complaint->type->value }}</p>
                                                 </td>
                                                 <td>
-                                                    <p class="text-sm font-weight-bold mb-0">
+                                                    <p class="text-sm font-weight-bold mb-0 ">
                                                         {{ $complaint->description }}</p>
                                                 </td>
                                                 <td>
                                                     <p class="text-sm font-weight-bold mb-0">
-                                                        {{ $complaint->created_at }}</p>
+                                                        {{ $complaint->created_at->format('Y/m/d') }}</p>
                                                 </td>
                                                 <td>
                                                     <p class="text-sm font-weight-bold mb-0">
-                                                        {{ $complaint->created_at }}</p>
+                                                        {{ $complaint->created_at->format('h:i:s A') }}</p>
                                                 </td>
                                                 <td>
                                                     <p class="text-sm font-weight-bold mb-0">
