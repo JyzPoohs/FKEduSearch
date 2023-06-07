@@ -28,8 +28,23 @@ class Complaint extends Model
         'complaint_created_at' => 'datetime',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
+
     public function type()
     {
         return $this->belongsTo(Reference::class, 'ref_complaint_type_id');
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(Reference::class, 'ref_complaint_status_id');
     }
 }

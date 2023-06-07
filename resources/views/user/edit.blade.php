@@ -50,7 +50,7 @@
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Facebook
                                             {{-- <span class="text-danger">*</span> --}}
-                                            </label>
+                                        </label>
                                         <input class="form-control" type="text" name="fb_acc"
                                             value="{{ $data['fb_acc'] }}">
                                     </div>
@@ -61,7 +61,7 @@
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Linkedin
                                             {{-- <span    class="text-danger">*</span> --}}
-                                            </label>
+                                        </label>
                                         <input class="form-control" type="text" name="linkedin_acc"
                                             value="{{ $data['linkedin_acc'] }}">
                                     </div>
@@ -89,22 +89,22 @@
                                         <label for="example-text-input" class="form-control-label">Role
                                             {{-- <span class="text-danger">*</span> --}}
                                         </label>
-                                            <input class="form-control" type="text" name="ref_role_id"
-                                            value="{{ $role->first()->value}}" disabled>
+                                        <input class="form-control" type="text" name="ref_role_id"
+                                            value="{{ $role->first()->value }}" disabled>
                                     </div>
                                 </div>
                             </div>
-                            </div>
-                            <div class="text-end mt-2">
-                                <a href="{{ route('user.index') }}" class="btn btn-secondary btn-md ms-auto">Back</a>
-                                <button type="submit" class="btn btn-success btn-md ms-auto">Save</button>
-                            </div>
-                        </form>
                     </div>
+                    <div class="text-end mt-2">
+                        <a href="{{ route('user.index') }}" class="btn btn-secondary btn-md ms-auto">Back</a>
+                        <button type="submit" class="btn btn-success btn-md ms-auto">Save</button>
+                    </div>
+                    </form>
                 </div>
             </div>
         </div>
-        @include('layouts.footers.auth.footer')
+    </div>
+    @include('layouts.footers.auth.footer')
     </div>
 @endsection
 

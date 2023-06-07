@@ -98,11 +98,11 @@ class UserController extends Controller
     {
         #Retrieve the necessary data
         $datas = User::whereNotNull('last_login')
-        ->orderBy('last_login','desc')
-        ->paginate(10);
+            ->orderBy('last_login', 'desc')
+            ->paginate(10);
         $users = User::whereNotNull('last_login')->get();
-        
-        
+
+
         $datas;
 
         #Set the time range for active users (e.g., last 30 days)
@@ -112,7 +112,7 @@ class UserController extends Controller
         $totalExperts = $users->where('ref_role_id', 9)->count();
         $totalUsers = $users->count();
         $activeUsers = $users->where('last_login', '>=', $timeRange)->count();
-        $percentageActive = number_format((($activeUsers / $totalUsers) * 100),2);
+        $percentageActive = number_format((($activeUsers / $totalUsers) * 100), 2);
 
         # Generate the KPI report
         $report = [

@@ -1,94 +1,8 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Reports'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Complaint Record'])
     <div class="container-fluid py-4">
-        <div class="row">
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card h-100">
-                    <div class="card-body p-3 d-flex flex-column justify-content-between">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total User</p>
-                                    <h5 class="font-weight-bolder">
-                                        {{ $report['Total Users'] }}
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-primary shadow-success text-center rounded-circle">
-                                    <i class="fas fa-users" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card h-100">
-                    <div class="card-body p-3 d-flex flex-column justify-content-between">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Active User</p>
-                                    <h5 class="font-weight-bolder">
-                                        {{ $report['Active Users'] }}
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
-                                    <i class="fas fa-user" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card h-100">
-                    <div class="card-body p-3 d-flex flex-column justify-content-between">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Experts</p>
-                                    <h5 class="font-weight-bolder">
-                                        {{ $report['Total Experts'] }}
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
-                                    <i class="fas fa-user-tie" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card h-100">
-                    <div class="card-body p-3 d-flex flex-column justify-content-between">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Percentage Active</p>
-                                    <h5 class="font-weight-bolder">
-                                        {{ $report['Percentage Active'] }}%
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                                    <i class="fas fa-percentage" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="row mt-4">
             <div class="col-lg-12 mb-lg-0 mb-4">
                 @if (session()->has('success'))
@@ -98,7 +12,7 @@
                 @endif
                 <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between mb-3">
-                        <h6>User Activity</h6>
+                        <h6>Complaint Record</h6>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
@@ -109,19 +23,28 @@
                                         </th>
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Name
+                                            Complaint Type
                                         </th>
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Email
+                                            Description
                                         </th>
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Role
+                                            Date
+                                        </th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Time
+                                        </th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Status
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Last Login</th>
+                                            Action
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -135,20 +58,30 @@
                                                 </td>
                                                 <td>
                                                     <p class="text-sm font-weight-bold mb-0">
-                                                        {{ $data['name'] }}</p>
+                                                        {{ $data->type->value }}
+                                                    </p>
                                                 </td>
                                                 <td>
                                                     <p class="text-sm font-weight-bold mb-0">
-                                                        {{ $data['email'] }}</p>
+                                                        {{ $data->description }}</p>
                                                 </td>
                                                 <td>
                                                     <p class="text-sm font-weight-bold mb-0">
-                                                        {{ $data['role']['value'] }}</p>
+                                                        {{ $data->created_at->format('Y-m-d') }}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-sm font-weight-bold mb-0">
+                                                        {{ $data->created_at->format('H:i:s') }}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-sm font-weight-bold mb-0">
+                                                        {{ $data->status->value }}</p>
                                                 </td>
                                                 <td class="align-middle text-end">
                                                     <div class="d-flex px-3 py-1 justify-content-center align-items-center">
-                                                        <p class="text-sm font-weight-bold mb-0">
-                                                            {{ $data['last_login'] }}</p>
+                                                        <a class="text-info me-3"
+                                                            href="{{ route('complaint.show', ['complaint' => $data['id']]) }}"><i
+                                                                class="fas fa-eye fa-lg" aria-hidden="true"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -156,7 +89,7 @@
                                     @else
                                         <tr>
                                             <td colspan="3" class="align-middle text-center">
-                                                <p class="text-sm font-weight-bold mb-0">There is no property
+                                                <p class="text-sm font-weight-bold mb-0">There is no complaint record
                                                     available.
                                                 </p>
                                             </td>
@@ -164,9 +97,6 @@
                                     @endif
                                 </tbody>
                             </table>
-                            <div class="px-3 pt-4">
-                                {{ $datas->links() }}
-                            </div>
                         </div>
                     </div>
                 </div>

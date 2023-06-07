@@ -13,7 +13,8 @@
                 <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between mb-3">
                         <h6>Complaint List</h6>
-                        <a href="{{ route('user.create') }}" class="btn btn-sm float-end mb-0" style="background-color: #57cc02;color:white">Report</a>
+                        <a href="{{ route('complaint.report') }}" class="btn btn-sm float-end mb-0"
+                            style="background-color: #57cc02;color:white">Report</a>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
@@ -62,40 +63,37 @@
                                                 </td>
                                                 <td>
                                                     <p class="text-sm font-weight-bold mb-0">
-                                                        John Doe{{ $data['name'] }}</p>
+                                                        {{ $data->user->name }}</p>
                                                 </td>
                                                 <td>
                                                     <p class="text-sm font-weight-bold mb-0">
-                                                        Unsatisfied Expert's Feedback{{-- {{ $data['complaint_type']['value'] }}--}}
-                                                    </p> 
+                                                        {{ $data->type->value }}
+                                                    </p>
                                                 </td>
                                                 <td>
                                                     <p class="text-sm font-weight-bold mb-0">
-                                                        {{ $data['description'] }}</p>
+                                                        {{ $data->description }}</p>
                                                 </td>
                                                 <td>
                                                     <p class="text-sm font-weight-bold mb-0">
-                                                        2023-05-06
-                                                        {{ $data['date'] }}</p>
+                                                        {{ $data->created_at->format('Y-m-d') }}</p>
                                                 </td>
                                                 <td>
                                                     <p class="text-sm font-weight-bold mb-0">
-                                                        10:10
-                                                        {{ $data['time'] }}</p>
+                                                        {{ $data->created_at->format('H:i:s') }}</p>
                                                 </td>
                                                 <td>
                                                     <p class="text-sm font-weight-bold mb-0">
-                                                        In Investigation
-                                                        {{ $data['complaint_status'] }}</p>
+                                                        {{ $data->status->value }}</p>
                                                 </td>
                                                 <td class="align-middle text-end">
                                                     <div class="d-flex px-3 py-1 justify-content-center align-items-center">
                                                         <a class="text-success me-3"
-                                                            href="{{ route('complaint.edit', ['complaint' => $data['id']]) }}"><i
+                                                            href="{{ route('complaint.show', ['complaint' => $data['id']]) }}"><i
                                                                 class="fa fa-pencil-square-o fa-lg"
                                                                 aria-hidden="true"></i></a>
                                                         <a class="text-danger" href="#"
-                                                            onclick="deleteRecord('{{ route('user.destroy', ['user' => $data['id']]) }}')"><i
+                                                            onclick="deleteRecord('{{ route('complaint.destroy', ['complaint' => $data['id']]) }}')"><i
                                                                 class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a>
                                                     </div>
                                                 </td>
@@ -112,9 +110,6 @@
                                     @endif
                                 </tbody>
                             </table>
-                            <div class="px-3 pt-4">
-                                {{ $datas->links() }}
-                            </div>
                         </div>
                     </div>
                 </div>

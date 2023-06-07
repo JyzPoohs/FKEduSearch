@@ -15,50 +15,56 @@
                         <h6>File Complaint</h6>
                     </div>
                     <div class="card-body p-3">
-                        <form role="form" method="POST" action={{ route('user.store') }} enctype="multipart/form-data">
+                        <form role="form" method="POST" action={{ route('complaint.store') }}
+                            enctype="multipart/form-data">
+                            
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Expert <span
+                                        <label for="example-text-input" class="form-control-label">Expert Name <span
                                                 class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="name" disabled>
+                                        <input class="form-control" type="text" disabled value="{{$datas->post->expert->name}}">
+                                        <input type="text" hidden name="post_id" value="{{$datas->post_id}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="type" class="form-control-label">Complaint Type <span
+                                                class="text-danger">*</span></label>
+                                        <select class="form-select" name="ref_complaint_type_id">
+                                            <option disabled selected>Select Complaint Type</option>
+                                            <option value="11"
+                                                {{ old('ref_complaint_type_id') === '11' ? 'selected' : '' }}>Unsatisfied
+                                                Expert's Feedback</option>
+                                            <option value="12"
+                                                {{ old('ref_complaint_type_id') === '12' ? 'selected' : '' }}>Wrongly
+                                                Assigned Research Area</option>
+                                            <option value="13"
+                                                {{ old('ref_complaint_type_id') === '13' ? 'selected' : '' }}>Inapproriate
+                                                Feedback
+                                            </option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Feedback Description<span
                                                 class="text-danger">*</span></label>
-                                        <input class="form-control" type="email" name="email" disabled>
+                                        <textarea disabled class="form-control" rows="2">{{$datas->post->description}}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Complaint Type<span
-                                                class="text-danger">*</span></label>
-                                        <select class="form-select" name="ref_complaint_type__id">
-                                            <option>Select Type</option>
-                                            <option value="">Unsatisfied Expert's Feedback</option>
-                                            {{-- @foreach ($roles as $role)
-                                                <option value="{{ $role->id }}">{{ $role->value }}</option>
-                                            @endforeach --}}
-                                        </select>
-                                    </div>
+                                    <label for="example-text-input" class="form-control-label">Complaint Description
+                                        <span class="text-danger">*</span></label>
+                                    <label class=" text-muted text-end" id="charCount">0 / 255 words</label>
+                                    <textarea class="form-control" name="description" rows="2" maxlength="255">{{old('description')}}</textarea>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Complaint Description <span
-                                                class="text-danger">*</span></label>
-                                        <input class="form-control" type="email" name="email"
-                                            value="{{--{{ $data['email'] }}--}}">
-                                    </div>
+                                <div class="text-end mt-2">
+                                    <button class="btn btn-success btn-md ms-auto w-10" onclick="return confirm('Confirm to submit complaint?')">Submit</button>
+                                    <a href="{{ route('post.index') }}" class="btn btn-secondary btn-md ms-auto">Back</a>
+                                    <button class="btn btn-danger btn-md ms-auto" type="reset">Clear</button>
                                 </div>
-                            </div>
-                            <div class="text-end mt-2">
-                                <button onclick="history.back()" class="btn btn-secondary btn-md ms-auto">Back</button>
-                                <button class="btn btn-success btn-md ms-auto">Submit</button>
-                                <button class="btn btn-danger btn-md ms-auto">Clear</button>
-                            </div>
                         </form>
                     </div>
                 </div>
@@ -69,5 +75,12 @@
 @endsection
 
 @push('js')
-    <script></script>
+    <script>
+        $(document).ready(function() {
+            $('textarea[name="description"]').on('input', function() {
+                var count = $(this).val().length;
+                $('#charCount').text(count + ' / 255 characters');
+            });
+        });
+    </script>
 @endpush
