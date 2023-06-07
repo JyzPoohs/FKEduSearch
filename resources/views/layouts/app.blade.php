@@ -55,7 +55,10 @@
             <main class="main-content border-radius-lg">
                 @yield('content')
             </main>
+            @if(auth()->user()->role->value == "user")
+
             @include('components.fixed-plugin')
+            @endif
         @endif
     @endauth
 
