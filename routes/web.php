@@ -46,18 +46,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/user/report', [UserController::class, 'report'])->name('user.report');
     Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
     Route::get('/form-example', [HomeController::class, 'formExample'])->name('form-example');
-    
-    
+
+
     Route::resources([
         'user' => UserController::class,
         'complaint' => ComplaintController::class,
-        'post' => PointController::class,
+        'post' => PostController::class,
         'like' => LikeController::class,
         'comment' => CommentController::class,
     ]);
     Route::get('/{page}', [PageController::class, 'index'])->name('page');
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
-    
+
 });
 
 
