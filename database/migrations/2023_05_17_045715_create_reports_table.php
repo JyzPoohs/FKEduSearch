@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->string('title');
+            $table->integer('classification');
+            $table->integer('severity');
             $table->string('description');
+            $table->integer('status');
             $table->timestamps();
         });
     }
