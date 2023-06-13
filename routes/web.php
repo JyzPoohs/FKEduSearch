@@ -12,6 +12,7 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ComplaintController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\URL;
 
 /*
@@ -57,6 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
         'post' => PostController::class,
         'like' => LikeController::class,
         'comment' => CommentController::class,
+        'report' => ReportController::class,
     ]);
 });
 
