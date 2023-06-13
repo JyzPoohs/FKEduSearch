@@ -47,9 +47,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/complaints/report', [ComplaintController::class, 'report'])->name('complaint.report');
     Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
     Route::get('/form-example', [HomeController::class, 'formExample'])->name('form-example');
-    Route::get('/{page}', [PageController::class, 'index'])->name('page');
+    // Route::get('/{page}', [PageController::class, 'index'])->name('page');
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
-
 
     Route::resources([
         'user' => UserController::class,
@@ -59,6 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
         'comment' => CommentController::class,
     ]);
 });
+
 
 
 URL::forceScheme('https');
