@@ -12,6 +12,7 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ComplaintController;
+use App\Http\Controllers\ExpertController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\URL;
 
@@ -41,11 +42,20 @@ Route::get('/change-password', [ChangePassword::class, 'show'])->middleware('gue
 Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
 
 Route::group(['middleware' => 'auth'], function () {
+    //user
     Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
     Route::get('/user/profile/{id}', [UserController::class, 'profileView'])->name('user.profile-view');
     Route::post('/user/profile-update', [UserController::class, 'profileUpdate'])->name('user.profile-update');
     Route::get('/user/report', [UserController::class, 'report'])->name('user.report');
+
+    //complaint
     Route::get('/complaints/report', [ComplaintController::class, 'report'])->name('complaint.report');
+
+    //expert
+    Route::post('/expert/answer', [ExpertController::class, 'answerQuestion'])->name('expert.answer-question');
+    Route::get('/expert/profile', [ExpertController::class, 'profile'])->name('expert.profile');
+
+    //others
     Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
     Route::get('/form-example', [HomeController::class, 'formExample'])->name('form-example');
     // Route::get('/{page}', [PageController::class, 'index'])->name('page');asdasd
@@ -59,6 +69,7 @@ Route::group(['middleware' => 'auth'], function () {
         'like' => LikeController::class,
         'comment' => CommentController::class,
         'report' => ReportController::class,
+        'expert' => ExpertController::class,
     ]);
 });
 
