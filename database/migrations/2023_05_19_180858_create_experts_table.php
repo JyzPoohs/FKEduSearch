@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('experts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->foreignId('ref_category_id');
+            $table->foreignId('ref_category_id')->nullable();
             $table->string('cv_upload')->nullable();
             $table->foreignId('ref_expert_status');
             $table->timestamps();

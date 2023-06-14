@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="/img/logo-ct-dark.png">
+    <link rel="icon" type="image/png" href="{{ env('APP_URL') . '/img/ump-logo.png' }}">
     <title>
         FK EduSearch
     </title>
@@ -55,9 +55,8 @@
             <main class="main-content border-radius-lg">
                 @yield('content')
             </main>
-            @if(auth()->user()->role->value == "user")
-
-            @include('components.fixed-plugin')
+            @if (auth()->user()->role->value == 'user')
+                @include('components.fixed-plugin')
             @endif
         @endif
     @endauth

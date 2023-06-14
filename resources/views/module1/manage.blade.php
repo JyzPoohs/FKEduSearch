@@ -3,6 +3,92 @@
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Manage Users'])
     <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body p-3 d-flex flex-column justify-content-between">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total User</p>
+                                    <h5 class="font-weight-bolder">
+                                        {{ $totalUser }}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow-success text-center rounded-circle">
+                                    <i class="fas fa-users" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body p-3 d-flex flex-column justify-content-between">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Expert</p>
+                                    <h5 class="font-weight-bolder">
+                                        {{ $totalExpert }}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
+                                    <i class="fas fa-user" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body p-3 d-flex flex-column justify-content-between">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Admin</p>
+                                    <h5 class="font-weight-bolder">
+                                        {{ $totalAdmin }}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
+                                    <i class="fas fa-user-tie" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body p-3 d-flex flex-column justify-content-between">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Active User</p>
+                                    <h5 class="font-weight-bolder">
+                                        {{ $totalActiveUser }}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
+                                    <i class="fas fa-percentage" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row mt-4">
             <div class="col-lg-12 mb-lg-0 mb-4">
                 @if (session()->has('success'))
@@ -16,9 +102,6 @@
                         <div class="btn-group">
                             <a href="{{ route('user.create') }}" class="btn btn-success btn-sm float-end mb-0 rounded">Add
                                 User</a>
-                            <a href="{{ route('user.report') }}" class="btn btn-info btn-sm float-end mb-0 ms-4 rounded">User
-                                Report</a>
-
                         </div>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
@@ -41,6 +124,10 @@
                                             Role
                                         </th>
                                         <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Status
+                                        </th>
+                                        <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Action</th>
                                     </tr>
@@ -56,23 +143,27 @@
                                                 </td>
                                                 <td>
                                                     <p class="text-sm font-weight-bold mb-0">
-                                                        {{ $data['name'] }}</p>
+                                                        {{ $data->name }}</p>
                                                 </td>
                                                 <td>
                                                     <p class="text-sm font-weight-bold mb-0">
-                                                        {{ $data['email'] }}</p>
+                                                        {{ $data->email }}</p>
                                                 </td>
                                                 <td>
                                                     <p class="text-sm font-weight-bold mb-0">
-                                                        {{ $data['role']['value'] }}</p>
+                                                        {{ ucfirst($data->role->value) }}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-sm font-weight-bold mb-0">
+                                                        {{ $data->is_approved == 1 ? 'Approved' : 'Not Approved' }}</p>
                                                 </td>
                                                 <td class="align-middle text-end">
                                                     <div class="d-flex px-3 py-1 justify-content-center align-items-center">
                                                         <a class="text-info me-3"
-                                                            href="{{ route('user.show', ['user' => $data['id']]) }}"><i
+                                                            href="{{ route('user.show', ['user' => $data->id]) }}"><i
                                                                 class="fas fa-eye fa-lg" aria-hidden="true"></i></a>
                                                         <a class="text-success me-3"
-                                                            href="{{ route('user.edit', ['user' => $data['id']]) }}"><i
+                                                            href="{{ route('user.edit', ['user' => $data->id]) }}"><i
                                                                 class="fa fa-pencil-square-o fa-lg"
                                                                 aria-hidden="true"></i></a>
                                                         <a class="text-danger" href="#"

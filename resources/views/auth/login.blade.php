@@ -62,10 +62,10 @@
                                 style="background-image: url('{{ env('APP_URL') . '/img/ump-logo.png' }}');
               background-size: cover;">
                                 <span class="mask bg-gradient-primary opacity-6"></span>
-                                <h4 class="mt-5 text-white font-weight-bolder position-relative">"Effortlessly manage your
-                                    tenancy records with ease!"</h4>
-                                <p class="text-white position-relative">Save time and ensure compliance with automated
-                                    reminders, real-time updates, and online document signing.</p>
+                                <h4 class="mt-5 text-white font-weight-bolder position-relative">"Unleash the Power of
+                                    Collective Wisdom"</h4>
+                                <p class="text-white position-relative">Embrace a dynamic knowledge sharing ecosystem that
+                                    transcends borders and empowers individuals to connect, learn, and thrive.</p>
                             </div>
                         </div>
                     </div>

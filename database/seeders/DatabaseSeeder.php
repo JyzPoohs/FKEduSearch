@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Expert;
+use App\Models\Reference;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
@@ -18,11 +20,11 @@ class DatabaseSeeder extends Seeder
 
     public function run()
     {
-        $this->registerUser();
-        $this->registerPost();
-        $this->registerComplaint();
         $this->registerReference();
-        User::factory()->count(20)->create();
+        $this->registerUser();
+        // $this->registerPost();
+        // $this->registerComplaint();
+        // User::factory()->count(20)->create();
     }
 
     public function registerUser()
@@ -31,31 +33,37 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Admin',
                 'email' => 'admin@example.com',
-                'password' => bcrypt('password'),
-                'ref_role_id' => 10,
+                'password' => 'password',
+                'ref_role_id' => Reference::where('name', 'roles')->where('code', 3)->first()->id,
             ],
             [
                 'name' => 'User 1',
                 'email' => 'user.1@example.com',
-                'password' => bcrypt('password'),
-                'ref_role_id' => 8,
+                'password' => 'password',
+                'ref_role_id' => Reference::where('name', 'roles')->where('code', 1)->first()->id,
             ],
             [
                 'name' => 'User 2',
                 'email' => 'user.2@example.com',
-                'password' => bcrypt('password'),
-                'ref_role_id' => 8,
+                'password' => 'password',
+                'ref_role_id' => Reference::where('name', 'roles')->where('code', 1)->first()->id,
             ],
             [
                 'name' => 'Expert',
                 'email' => 'expert@example.com',
-                'password' => bcrypt('password'),
-                'ref_role_id' => 9,
+                'password' => 'password',
+                'ref_role_id' => Reference::where('name', 'roles')->where('code', 2)->first()->id,
             ],
         ];
 
         foreach ($datas as $data) {
-            DB::table('users')->insert($data);
+            $user = User::create($data);
+            if ($user->role->value == 'expert') {
+                Expert::create([
+                    'user_id' => $user->id,
+                    'ref_expert_status' => Reference::where('name', 'expert-status')->where('code', 1)->first()->id,
+                ]);
+            }
         }
     }
 
@@ -193,17 +201,17 @@ class DatabaseSeeder extends Seeder
             //roles
             [
                 'name' => 'roles',
-                'code' => 8,
+                'code' => 1,
                 'value' => 'user',
             ],
             [
                 'name' => 'roles',
-                'code' => 9,
+                'code' => 2,
                 'value' => 'expert',
             ],
             [
                 'name' => 'roles',
-                'code' => 10,
+                'code' => 3,
                 'value' => 'admin',
             ],
             //complaint-type
@@ -237,6 +245,17 @@ class DatabaseSeeder extends Seeder
                 'name' => 'complaint-status',
                 'code' => 3,
                 'value' => 'Resolved',
+            ],
+            //expert-status
+            [
+                'name' => 'expert-status',
+                'code' => 1,
+                'value' => 'Active',
+            ],
+            [
+                'name' => 'expert-status',
+                'code' => 2,
+                'value' => 'Inactive',
             ],
         ];
 

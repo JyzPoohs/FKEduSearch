@@ -9,8 +9,7 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-5 text-center mx-auto">
                         <h1 class="text-white mb-2 mt-5">Welcome!</h1>
-                        <p class="text-lead text-white">Use these awesome forms to login or create new account in your
-                            project for free.</p>
+                        <p class="text-lead text-white">FK EduSearch</p>
                     </div>
                 </div>
             </div>
@@ -26,8 +25,8 @@
                             <form method="POST" action="{{ route('register.perform') }}">
                                 @csrf
                                 <div class="flex flex-col mb-3">
-                                    <input type="text" name="username" class="form-control" placeholder="Username"
-                                        aria-label="Name" value="{{ old('username') }}">
+                                    <input type="text" name="name" class="form-control" placeholder="Full Name"
+                                        aria-label="Name" value="{{ old('name') }}">
                                     @error('username')
                                         <p class='text-danger text-xs pt-1'> {{ $message }} </p>
                                     @enderror
@@ -45,6 +44,14 @@
                                     @error('password')
                                         <p class='text-danger text-xs pt-1'> {{ $message }} </p>
                                     @enderror
+                                </div>
+                                <div class="flex flex-col mb-3">
+                                    <select class="form-select" name="ref_role_id">
+                                        <option>Select Role</option>
+                                        @foreach ($roles as $role)
+                                            <option value="{{ $role->id }}">{{ ucfirst($role->value) }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="form-check form-check-info text-start">
                                     <input class="form-check-input" type="checkbox" name="terms" id="flexCheckDefault">

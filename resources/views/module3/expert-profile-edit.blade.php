@@ -119,17 +119,17 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Post</p>
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Post Answered</p>
                                     <h5 class="font-weight-bolder">
-                                        {{ auth()->user()->posts->count() }}
+                                        {{ auth()->user()->expert->answeredPosts->count() }}
                                     </h5>
                                     <p class="mb-0">
                                         @if (auth()->user()->posts->count() > 0)
-                                            Last posted on
+                                            Last post answered on
                                             <span
                                                 class="text-primary text-sm font-weight-bolder">{{ auth()->user()->posts->last()->created_at }}.</span>
                                         @else
-                                            No post yet.
+                                            No answered post yet.
                                         @endif
                                     </p>
                                 </div>

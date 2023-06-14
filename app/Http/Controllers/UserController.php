@@ -14,18 +14,22 @@ class UserController extends Controller
     public function index()
     {
         $datas = User::with('role')->paginate(10);
+        $totalUser = User::where('ref_role_id', Reference::where('name', 'roles')->where('code', 1)->first()->id)->count();
+        $totalExpert = User::where('ref_role_id', Reference::where('name', 'roles')->where('code', 2)->first()->id)->count();
+        $totalAdmin = User::where('ref_role_id', Reference::where('name', 'roles')->where('code', 3)->first()->id)->count();
+        $totalActiveUser = User::where('ref_role_id', Reference::where('name', 'roles')->where('code', 3)->first()->id)
+            ->where('is_approved', 1)
+            ->count();
 
-        return view('user.manage', compact('datas'));
+        return view('module1.manage', compact('datas', 'totalUser', 'totalExpert', 'totalAdmin', 'totalActiveUser'));
     }
 
     public function edit($id)
     {
-        $data = User::find($id)->toArray();
-        $role = Reference::where('code', $data['ref_role_id'])
-            ->where('name', 'roles')
-            ->get();
+        $data = User::find($id);
+        $roles = Reference::where('name', 'roles')->orderBy('code')->get();
 
-        return view('user.edit', compact('data', 'role'));
+        return view('module1.edit', compact('data', 'roles'));
     }
 
     public function destroy($user)
@@ -39,7 +43,7 @@ class UserController extends Controller
     {
         $roles = Reference::where('name', 'roles')->orderBy('code')->get();
 
-        return view('user.create', compact('roles'));
+        return view('module1.create', compact('roles'));
     }
 
     public function store(Request $request)
@@ -87,42 +91,40 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $data = User::find($id)->toArray();
-        $role = Reference::where('code', $data['ref_role_id'])->get();
+        $data = User::find($id);
 
-        return view('module1.viewUser', compact('data', 'role'));
-        #return view('module1.viewUser');
+        return view('module1.show', compact('data'));
     }
 
-    public function report()
-    {
-        #Retrieve the necessary data
-        $datas = User::whereNotNull('last_login')
-            ->orderBy('last_login', 'desc')
-            ->paginate(10);
-        $users = User::whereNotNull('last_login')->get();
+    // public function report()
+    // {
+    //     #Retrieve the necessary data
+    //     $datas = User::whereNotNull('last_login')
+    //         ->orderBy('last_login', 'desc')
+    //         ->paginate(10);
+    //     $users = User::whereNotNull('last_login')->get();
 
 
-        $datas;
+    //     $datas;
 
-        #Set the time range for active users (e.g., last 30 days)
-        $timeRange = Carbon::now()->subDays(30);
+    //     #Set the time range for active users (e.g., last 30 days)
+    //     $timeRange = Carbon::now()->subDays(30);
 
-        # Calculate KPI metrics
-        $totalExperts = $users->where('ref_role_id', 9)->count();
-        $totalUsers = $users->count();
-        $activeUsers = $users->where('last_login', '>=', $timeRange)->count();
-        $percentageActive = number_format((($activeUsers / $totalUsers) * 100), 2);
+    //     # Calculate KPI metrics
+    //     $totalExperts = $users->where('ref_role_id', 9)->count();
+    //     $totalUsers = $users->count();
+    //     $activeUsers = $users->where('last_login', '>=', $timeRange)->count();
+    //     $percentageActive = number_format((($activeUsers / $totalUsers) * 100), 2);
 
-        # Generate the KPI report
-        $report = [
-            'Total Experts' => $totalExperts,
-            'Total Users' => $totalUsers,
-            'Active Users' => $activeUsers,
-            'Percentage Active' => $percentageActive,
-        ];
+    //     # Generate the KPI report
+    //     $report = [
+    //         'Total Experts' => $totalExperts,
+    //         'Total Users' => $totalUsers,
+    //         'Active Users' => $activeUsers,
+    //         'Percentage Active' => $percentageActive,
+    //     ];
 
-        # Pass the report data to a view for rendering
-        return view('module1.report', compact('datas', 'report'));
-    }
+    //     # Pass the report data to a view for rendering
+    //     return view('module1.report', compact('datas', 'report'));
+    // }
 }

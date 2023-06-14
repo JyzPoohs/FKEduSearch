@@ -30,4 +30,9 @@ class Expert extends Model
     {
         return $this->belongsTo(Reference::class, 'ref_expert_status');
     }
+
+    public function answeredPosts()
+    {
+        return $this->hasMany(Post::class, 'accepted_by', 'user_id');
+    }
 }

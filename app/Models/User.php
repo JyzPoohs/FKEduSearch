@@ -80,4 +80,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Complaint::class, 'user_id');
     }
+
+    public function expert()
+    {
+        return $this->hasOne(Expert::class);
+    }
 }

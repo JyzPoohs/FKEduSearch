@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Property;
-use App\Models\TenancyRecord;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\Complaint;
+use App\Models\Post;
+use App\Models\Reference;
+use App\Models\Report;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -26,7 +27,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('pages.dashboard');
+        $categories = Reference::where('name', 'category')->orderBy('code')->get();
+        $users = User::count();
+        $complaints = Complaint::count();
+        $reports = Report::count();
+        $posts = Post::count();
+        return view('pages.dashboard', compact('categories', 'users', 'complaints', 'reports', 'posts'));
     }
 
     public function formExample()
