@@ -78,7 +78,7 @@
                                                 <div class="d-flex justify-content-between">
                                                     <h6>Answer</h6>
                                                     <small class="mb-0 text-small text-bold">
-                                                        <a href="{{ route('complaint.create') }}">
+                                                        <a href="{{ route('complaint.file', ['id' => $data['id']]) }}">
                                                             <i class="fa fa-flag" aria-hidden="true"></i>
                                                         </a>
                                                         {{ $data['expert']['name'] }}

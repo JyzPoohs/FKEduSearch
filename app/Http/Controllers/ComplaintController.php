@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Reference;
-use App\Models\Complaint;
+use Illuminate\Support\Facades\DB;
 use App\Models\Post;
+use App\Models\Complaint;
 use Carbon\Carbon;
 
 class ComplaintController extends Controller
 {
+    //To display complaint list
     public function index()
     {
 
@@ -23,17 +24,26 @@ class ComplaintController extends Controller
         }
     }
 
-    public function create()
+    //To display file complaint form
+    public function file($id)
     {
+        $data = Post::with(['user', 'expert', 'category', 'likes'])->where('id', $id)->first();
 
-        $datas = Complaint::with(['user', 'post', 'type', 'status'])->find(auth()->user()->id);
-
-        //dd($datas);
-        return view('complaint.create', compact('datas'));
+        return view('complaint.create', compact('data'));
     }
 
+    //Store user file complaint record
     public function store(Request $request)
     {
+        $request->validate(
+            [
+                'ref_complaint_type_id' => 'required'
+            ],
+            [
+                'ref_complaint_type_id.required' => 'Must select a complaint type'
+            ]
+        );
+
         $request->merge([
             'post_id' => $request->post_id,
             'user_id' => auth()->user()->id,
@@ -46,24 +56,24 @@ class ComplaintController extends Controller
             ->with('success', "Complaint Successfully Added");
     }
 
-    public function edit($id)
+    //To search complaint list by complaint type
+    public function search(Request $request)
     {
-        // $data = User::find($id)->toArray();
-        // $role = Reference::where('code', $data['ref_role_id'])
-        //     ->where('name', 'roles')
-        //     ->get();
+        $complaintType = $request->input('ref_complaint_type_id');
+        $datas = Complaint::with(['user', 'post', 'type', 'status'])->orderBy('created_at', 'desc')->where('ref_complaint_type_id', $complaintType)->get();
 
-        // return view('user.edit', compact('data', 'role'));
+        return view('module5.admin.manage', compact('datas'));
     }
 
+    //To display edit complaint form
     public function show($id)
     {
         $data = Complaint::with(['user', 'post', 'type', 'status'])->find($id);
 
-        //dd($data);
         return view('complaint.edit', compact('data'));
     }
 
+    //To update edited complaint info
     public function update(Request $request, $complaint)
     {
         Complaint::find($complaint)->update($request->all());
@@ -72,6 +82,7 @@ class ComplaintController extends Controller
             ->with('success', "Complaint Successfully Updated");
     }
 
+    //To delete selected complaint record
     public function destroy($property)
     {
         Complaint::find($property)->delete();
@@ -79,19 +90,28 @@ class ComplaintController extends Controller
         return response()->json(['success' => true]);
     }
 
+    //To get the complaint report
     public function report()
     {
         # Retrieve the necessary data
         $complaints = Complaint::with(['user', 'post', 'type', 'status'])->orderBy('created_at', 'desc')->get();
         $totalComplaints = Complaint::count();
 
-        # Set the time range for active complaints (e.g., last 30 days)
+        # Set the time range for complaints in 30 days
         $timeRange = Carbon::now()->subDays(30);
 
-        # Calculate KPI metrics
+        # Calculate complaint type KPI metrics
         $unsatisfiedComplaints = $complaints->where('ref_complaint_type_id', 11)->count();
         $wrongAssignedComplaints = $complaints->where('ref_complaint_type_id', 12)->count();
         $inappropriateComplaints = $complaints->where('ref_complaint_type_id', 13)->count();
+
+        #Calculate complaint status KPI metrics
+        $investigateComplaints = $complaints->where('ref_complaint_status_id', '14')->count();
+        $holdComplaints = $complaints->where('ref_complaint_status_id', '15')->count();
+        $resolvedComplaints = $complaints->where('ref_complaint_status_id', '16')->count();
+
+        #Calculate total complaints that havent solved
+        $unresolvedComplaints = $totalComplaints - $resolvedComplaints;
 
         # Generate the KPI report
         $report = [
@@ -99,7 +119,12 @@ class ComplaintController extends Controller
             'Unsatisfied Complaints' => $unsatisfiedComplaints,
             'Wrongly Assigned Complaints' => $wrongAssignedComplaints,
             'Inappropriate Complaints' => $inappropriateComplaints,
+            'In Investigation Complaints' => $investigateComplaints,
+            'On Hold Complaints' => $holdComplaints,
+            'Resolved Complaints' => $resolvedComplaints,
+            'Unresolved Complaints' => $unresolvedComplaints,
         ];
+
 
         # Pass the report data to a view for rendering
         return view('module5.admin.report', compact('complaints', 'report'));

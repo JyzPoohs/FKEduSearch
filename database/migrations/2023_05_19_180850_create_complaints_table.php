@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('post_id');
             $table->foreignId('ref_complaint_type_id');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->foreignId('ref_complaint_status_id');
             $table->timestamps();
         });

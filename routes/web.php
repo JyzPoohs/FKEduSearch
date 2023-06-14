@@ -49,7 +49,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/user/report', [UserController::class, 'report'])->name('user.report');
 
     //complaint
+    Route::get('/complaints/file/{id}', [ComplaintController::class, 'file'])->name('complaint.file');
     Route::get('/complaints/report', [ComplaintController::class, 'report'])->name('complaint.report');
+    Route::get('/complaint/search', [ComplaintController::class, 'search'])->name('complaint.search');
 
     //expert
     Route::post('/expert/answer', [ExpertController::class, 'answerQuestion'])->name('expert.answer-question');

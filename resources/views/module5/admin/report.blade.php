@@ -1,4 +1,5 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Complaint Report'])
@@ -100,6 +101,7 @@
                 <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between mb-3">
                         <h6>Complaint List</h6>
+                        <a class="btn btn-primary col-sm-1 offset-md-9" href="{{ route('complaint.index') }}">Back</a>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
@@ -116,7 +118,7 @@
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                             Complaint Type
                                         </th>
-                                        <th style="width: 80px"
+                                        <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                             Description
                                         </th>
@@ -183,14 +185,113 @@
                         </div>
                     </div>
                 </div>
-                <a class="btn btn-primary col-sm-1 offset-md-10" href="{{ route('complaint.index') }}">Back</a>
+                <!-- Display the number of unresolved complaints -->
+                <p class="text-danger">Total Unresolved Complaints: {{ $report['Unresolved Complaints'] }}</p>
             </div>
         </div>
-        @include('layouts.footers.auth.footer')
+        <div class="row mt-3 justify-content-center">
+            <div class="col-md-3">
+                <canvas id="complaintStatusChart"></canvas>
+            </div>
+            <div class="col-md-5">
+                <canvas id="complaintsChart"></canvas>
+            </div>
+        </div>
     </div>
+    @include('layouts.footers.auth.footer')
 @endsection
 
 @push('js')
+    <script>
+        //Script to generate pie chart for complaint status
+
+        // Get the inputs values from the PHP variables
+        var investigateComplaints = {{ $report['In Investigation Complaints'] }};
+        var holdComplaints = {{ $report['On Hold Complaints'] }};
+        var resolvedComplaints = {{ $report['Resolved Complaints'] }};
+
+        // Define an array of colors for each segment
+        var segmentColors = ['#FF6384', '#36A2EB', '#FFCE56'];
+
+        // Create a pie chart
+        var ctx = document.getElementById('complaintStatusChart').getContext('2d');
+        var complaintStatusChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Investigation', 'On Hold', 'Resolved'],
+                datasets: [{
+                    data: [investigateComplaints, holdComplaints, resolvedComplaints],
+                    backgroundColor: segmentColors,
+                    borderColor: '#fff',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Current Complaint Status Count',
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        }
+                    },
+                    legend: {
+                        display: true,
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script>
+        //Script to generate bar chart for complaint type
+
+        // Get the inputs values from the PHP variables
+        var unsatisfiedComplaints = {{ $report['Unsatisfied Complaints'] }};
+        var wronglyAssignedComplaints = {{ $report['Wrongly Assigned Complaints'] }};
+        var inappropriateComplaints = {{ $report['Inappropriate Complaints'] }};
+
+        // Define an array of colors for each bar
+        var barColors = ['#235391', '#57CC02', '#1D7A85'];
+
+        // Create a bar chart
+        var ctx = document.getElementById('complaintsChart').getContext('2d');
+        var complaintsChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Unsatisfied', 'Wrongly Assigned', 'Inappropriate'],
+                datasets: [{
+                    label: 'Complaint Type',
+                    data: [unsatisfiedComplaints, wronglyAssignedComplaints, inappropriateComplaints],
+                    backgroundColor: barColors,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Complaint Type in 30 Days',
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
     <script>
         function deleteRecord(url) {
             Swal.fire({
