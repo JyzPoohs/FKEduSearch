@@ -41,7 +41,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Status</label>
-                                        <select class="form-select" name="ref_role_id">
+                                        <select class="form-select" name="is_approved">
                                             <option value="">Select Status</option>
                                             <option value="1">
                                                 Approved</option>

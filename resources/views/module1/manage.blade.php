@@ -73,7 +73,7 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Active User</p>
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total User Approved</p>
                                     <h5 class="font-weight-bolder">
                                         {{ $totalActiveUser }}
                                     </h5>
