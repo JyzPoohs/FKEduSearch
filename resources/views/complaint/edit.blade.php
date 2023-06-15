@@ -1,7 +1,9 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => auth()->user()->ref_role_id === 8 ? 'View Complaint' : 'Edit Complaint'])
+    @include('layouts.navbars.auth.topnav', [
+        'title' => auth()->user()->ref_role_id === 8 ? 'View Complaint' : 'Edit Complaint',
+    ])
 
     <div class="container-fluid py-4">
         <div class="row mt-4">
@@ -112,8 +114,18 @@
                                 <a href="{{ route('complaint.index') }}" class="btn btn-secondary btn-md ms-auto">Back</a>
                             </div>
                         </form>
+                        @if (auth()->user()->ref_role_id === 8)
+                        <label class="text-muted">Scan to download complaint record: </label>
+                        <button class="btn btn-default mb-0 ml-1" id="generateBtn">Show QR Code</button>
+                        @endif
                     </div>
                 </div>
+                <div class="row ml-2">
+                    <div class="qr-img">
+                        <img id="qrCodeImg" src="">
+                    </div>
+                </div>
+
             </div>
         </div>
         @include('layouts.footers.auth.footer')
@@ -121,5 +133,17 @@
 @endsection
 
 @push('js')
-    <script></script>
+    <script>
+        //To generate QR Code image
+        let button = document.getElementById("generateBtn");
+        let qrImg = document.getElementById("qrCodeImg");
+
+        button.addEventListener("click", function() {
+            let data = "Complaint record"; 
+
+            let imgSrc = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(
+                data);
+            qrImg.src = imgSrc;
+        });
+    </script>
 @endpush
