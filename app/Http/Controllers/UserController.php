@@ -11,9 +11,12 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    //to display user dashboard
     public function index()
     {
-        $datas = User::with('role')->paginate(10);
+        $datas = User::with('role')->whereDoesntHave('role', function ($query) {
+            $query->where('code', 3);
+        })->paginate(10);
         $totalUser = User::where('ref_role_id', Reference::where('name', 'roles')->where('code', 1)->first()->id)->count();
         $totalExpert = User::where('ref_role_id', Reference::where('name', 'roles')->where('code', 2)->first()->id)->count();
         $totalAdmin = User::where('ref_role_id', Reference::where('name', 'roles')->where('code', 3)->first()->id)->count();
@@ -24,6 +27,7 @@ class UserController extends Controller
         return view('module1.manage', compact('datas', 'totalUser', 'totalExpert', 'totalAdmin', 'totalActiveUser'));
     }
 
+    //to display edit user interface
     public function edit($id)
     {
         $data = User::find($id);
@@ -32,6 +36,7 @@ class UserController extends Controller
         return view('module1.edit', compact('data', 'roles'));
     }
 
+    //to delete user
     public function destroy($user)
     {
         User::find($user)->delete();
@@ -39,6 +44,7 @@ class UserController extends Controller
         return response()->json(['success' => true]);
     }
 
+    //to display create user interface
     public function create()
     {
         $roles = Reference::where('name', 'roles')->orderBy('code')->get();
@@ -46,6 +52,7 @@ class UserController extends Controller
         return view('module1.create', compact('roles'));
     }
 
+    //to save new user into database
     public function store(Request $request)
     {
         $request->merge([
@@ -58,6 +65,7 @@ class UserController extends Controller
             ->with('success', "User Successfully Added");
     }
 
+    //to save updated user info in database
     public function update(Request $request, $user)
     {
         User::find($user)->update($request->all());
@@ -65,6 +73,7 @@ class UserController extends Controller
         return redirect()->route('user.index')
             ->with('success', "User Successfully Updated");
     }
+
 
     public function profile()
     {
@@ -89,6 +98,7 @@ class UserController extends Controller
         return redirect()->back()->with('success', "Profile Successfully Updated!");
     }
 
+    //to show user information
     public function show($id)
     {
         $data = User::find($id);

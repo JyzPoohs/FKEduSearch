@@ -1,10 +1,11 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     @include('layouts.navbars.auth.topnav', ['title' => 'Manage Users'])
     <div class="container-fluid py-4">
         <div class="row">
-            <div class="col-xl-3 col-md-6 mb-4">
+            <div class="col-xl-4 col-md-6 mb-4">
                 <div class="card h-100">
                     <div class="card-body p-3 d-flex flex-column justify-content-between">
                         <div class="row">
@@ -25,7 +26,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-md-6 mb-4">
+            <div class="col-xl-4 col-md-6 mb-4">
                 <div class="card h-100">
                     <div class="card-body p-3 d-flex flex-column justify-content-between">
                         <div class="row">
@@ -46,7 +47,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-md-6 mb-4">
+            {{-- <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card h-100">
                     <div class="card-body p-3 d-flex flex-column justify-content-between">
                         <div class="row">
@@ -66,8 +67,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-3 col-md-6 mb-4">
+            </div> --}}
+            <div class="col-xl-4 col-md-6 mb-4">
                 <div class="card h-100">
                     <div class="card-body p-3 d-flex flex-column justify-content-between">
                         <div class="row">
@@ -89,6 +90,20 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-xl-12 col-md-12">
+                <div class="card h-100">
+                    <div class="card-body p-3 d-flex flex-column justify-content-between">
+                        <div class="row">
+                            <div class="col-md-12 d-flex justify-content-center">
+                                <canvas id="myChart" style="max-width: 600px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <div class="row mt-4">
             <div class="col-lg-12 mb-lg-0 mb-4">
                 @if (session()->has('success'))
@@ -244,5 +259,36 @@
                 }
             })
         }
+
+        var xValues = ["General User", "Expert"];
+var yValues = [@json($totalUser), @json($totalExpert)];
+var barColors = [
+    "#b91d47",
+    "#00aba9",
+    "#2b5797",
+    "#e8c3b9",
+    "#1e7145"
+];
+
+new Chart("myChart", {
+    type: "doughnut",
+    data: {
+        labels: xValues,
+        datasets: [{
+            backgroundColor: barColors,
+            data: yValues
+        }]
+    },
+    options: {
+        title: {
+            display: true,
+            text: "User"
+        },
+        legend: {
+            position: "right" // Set the legend position to the right
+        }
+    }
+});
+
     </script>
 @endpush

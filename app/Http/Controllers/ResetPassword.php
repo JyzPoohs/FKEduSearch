@@ -11,6 +11,7 @@ class ResetPassword extends Controller
 {
     use Notifiable;
 
+    //to display the interface to request user email
     public function show()
     {
         return view('auth.reset-password');
@@ -20,6 +21,7 @@ class ResetPassword extends Controller
         return request()->email;
     }
 
+    //to validate the email and create new token
     public function send(Request $request)
     {
         $email = $request->validate([

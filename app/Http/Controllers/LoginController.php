@@ -21,6 +21,7 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
+    //to validate user and redirect user to respected dashboard
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -53,6 +54,7 @@ class LoginController extends Controller
         ]);
     }
 
+    //to logout
     public function logout(Request $request)
     {
         Auth::logout();

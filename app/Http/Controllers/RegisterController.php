@@ -9,6 +9,7 @@ use App\Models\User;
 
 class RegisterController extends Controller
 {
+    //to display interface for register new user
     public function create()
     {
         $roles = Reference::where('name', 'roles')->whereIn('code', [1, 2])->orderBy('code')->get();
@@ -16,6 +17,7 @@ class RegisterController extends Controller
         return view('auth.register', compact('roles'));
     }
 
+    //to save the newly register user to database and login user
     public function store()
     {
         $attributes = request()->validate([

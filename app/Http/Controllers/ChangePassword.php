@@ -19,11 +19,13 @@ class ChangePassword extends Controller
         $this->user = User::find($id);
     }
 
+    //to display change password interface
     public function show()
     {
         return view('auth.change-password');
     }
 
+    //save new password
     public function update(Request $request)
     {
         $attributes = $request->validate([
