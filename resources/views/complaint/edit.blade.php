@@ -2,7 +2,7 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', [
-        'title' => auth()->user()->ref_role_id === 8 ? 'View Complaint' : 'Edit Complaint',
+        'title' => auth()->user()->ref_role_id === 7 ? 'View Complaint' : 'Edit Complaint',
     ])
 
     <div class="container-fluid py-4">
@@ -15,7 +15,7 @@
                 @endif
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>{{ auth()->user()->ref_role_id === 8 ? 'View Complaint' : 'Edit Complaint' }}</h6>
+                        <h6>{{ auth()->user()->ref_role_id === 7 ? 'View Complaint' : 'Edit Complaint' }}</h6>
                     </div>
                     <div class="card-body p-3">
                         <form role="form" method="POST"
@@ -59,15 +59,13 @@
                                         <label for="type" class="form-control-label">Complaint Type <span
                                                 class="text-danger">*</span></label>
                                         <select class="form-select" name="ref_complaint_type_id"
-                                            @if (auth()->user()->ref_role_id === 8) disabled @endif>
+                                            @if (auth()->user()->ref_role_id === 7) disabled @endif>
                                             <option disabled selected>Select Complaint Type</option>
-                                            <option value="11" @if ($data->type->value == 'Unsatisfied Expert Feedback') selected @endif>
-                                                Unsatisfied Expert's
-                                                Feedback</option>
-                                            <option value="12" @if ($data->type->value == 'Wrongly Assigned Research Area') selected @endif>Wrongly
-                                                Assigned Research
-                                                Area</option>
-                                            <option value="13" @if ($data->type->value == 'Inapproriate Feedback') selected @endif>
+                                            <option value="10" @if ($data->type->code == '1') selected @endif>
+                                                Unsatisfied Expert's Feedback</option>
+                                            <option value="11" @if ($data->type->code == '2') selected @endif>Wrongly
+                                                Assigned Research Area</option>
+                                            <option value="12" @if ($data->type->code == '3') selected @endif>
                                                 Inapproriate Feedback
                                             </option>
                                         </select>
@@ -79,14 +77,11 @@
                                         <label for="status" class="form-control-label">Complaint Status <span
                                                 class="text-danger">*</span></label>
                                         <select class="form-select" name="ref_complaint_status_id"
-                                            @if (auth()->user()->ref_role_id === 8) disabled @endif>
+                                            @if (auth()->user()->ref_role_id === 7) disabled @endif>
                                             <option disabled selected>Select Complaint Status</option>
-                                            <option value="14" @if ($data->status->value == 'In Investigation') selected @endif>In
-                                                Investigation</option>
-                                            <option value="15" @if ($data->status->value == 'On Hold') selected @endif>On
-                                                Hold</option>
-                                            <option value="16" @if ($data->status->value == 'Resolved') selected @endif>
-                                                Resolved</option>
+                                            <option value="13" @if ($data->status->code == '1') selected @endif>In Investigation</option>
+                                            <option value="14" @if ($data->status->code == '2') selected @endif>On Hold</option>
+                                            <option value="15" @if ($data->status->code == '3') selected @endif>Resolved</option>
                                         </select>
                                     </div>
                                 </div>
@@ -108,13 +103,13 @@
                                 </div>
                             </div>
                             <div class="text-end mt-2">
-                                @if (auth()->user()->ref_role_id === 10)
+                                @if (auth()->user()->ref_role_id === 9)
                                     <button class="btn btn-success btn-md ms-auto">Save</button>
                                 @endif
                                 <a href="{{ route('complaint.index') }}" class="btn btn-secondary btn-md ms-auto">Back</a>
                             </div>
                         </form>
-                        @if (auth()->user()->ref_role_id === 8)
+                        @if (auth()->user()->ref_role_id === 7)
                         <label class="text-muted">Scan to download complaint record: </label>
                         <button class="btn btn-default mb-0 ml-1" id="generateBtn">Show QR Code</button>
                         @endif
