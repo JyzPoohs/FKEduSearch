@@ -55,7 +55,7 @@
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Feedback Description<span
                                                 class="text-danger">*</span></label>
-                                        <textarea disabled class="form-control" rows="2">{{ $data['answer'] }}</textarea>
+                                        <textarea disabled class="form-control" rows="2">{{ $post->answer }}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
