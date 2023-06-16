@@ -52,6 +52,7 @@
                                         @php $counter = 0; @endphp
                                         @foreach ($datas as $data)
                                             @php $counter++; @endphp
+
                                             <tr>
                                                 <td>
                                                     <p class="text-sm font-weight-bold mb-0 ms-3">{{ $counter }}</p>
@@ -80,7 +81,7 @@
                                                 <td class="align-middle text-end">
                                                     <div class="d-flex px-3 py-1 justify-content-center align-items-center">
                                                         <a class="text-info me-3"
-                                                            href="{{ route('complaint.show', ['complaint' => $data['id']]) }}"><i
+                                                            href="{{ route('complaint.show', ['complaint' => $data['post_id']]) }}"><i
                                                                 class="fas fa-eye fa-lg" aria-hidden="true"></i></a>
                                                     </div>
                                                 </td>

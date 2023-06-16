@@ -1,11 +1,10 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @if (auth()->user()->ref_role_id === 8)
-        @include('layouts.navbars.auth.topnav', ['title' => 'View Complaint'])
-    @elseif (auth()->user()->ref_role_id === 10)
-        @include('layouts.navbars.auth.topnav', ['title' => 'Edit Complaint'])
-    @endif
+    @include('layouts.navbars.auth.topnav', [
+        'title' => auth()->user()->ref_role_id === 8 ? 'View Complaint' : 'Edit Complaint',
+    ])
+
     <div class="container-fluid py-4">
         <div class="row mt-4">
             <div class="col-lg-12 mb-lg-0 mb-4">
@@ -16,7 +15,7 @@
                 @endif
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>Edit Complaint</h6>
+                        <h6>{{ auth()->user()->ref_role_id === 8 ? 'View Complaint' : 'Edit Complaint' }}</h6>
                     </div>
                     <div class="card-body p-3">
                         <form role="form" method="POST"
@@ -24,6 +23,7 @@
                             enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -51,7 +51,7 @@
                                     <div class="form-group">
                                         <label for="feedback" class="form-control-label">Feedback Description
                                             <span class="text-danger">*</span></label>
-                                        <textarea disabled class="form-control" id="" rows="2">{{ $data->post->description }}</textarea>
+                                        <textarea disabled class="form-control" id="" rows="2">{{ $data->post->answer }}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -114,8 +114,18 @@
                                 <a href="{{ route('complaint.index') }}" class="btn btn-secondary btn-md ms-auto">Back</a>
                             </div>
                         </form>
+                        @if (auth()->user()->ref_role_id === 8)
+                        <label class="text-muted">Scan to download complaint record: </label>
+                        <button class="btn btn-default mb-0 ml-1" id="generateBtn">Show QR Code</button>
+                        @endif
                     </div>
                 </div>
+                <div class="row ml-2">
+                    <div class="qr-img">
+                        <img id="qrCodeImg" src="">
+                    </div>
+                </div>
+
             </div>
         </div>
         @include('layouts.footers.auth.footer')
@@ -123,5 +133,17 @@
 @endsection
 
 @push('js')
-    <script></script>
+    <script>
+        //To generate QR Code image
+        let button = document.getElementById("generateBtn");
+        let qrImg = document.getElementById("qrCodeImg");
+
+        button.addEventListener("click", function() {
+            let data = "Complaint record"; 
+
+            let imgSrc = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(
+                data);
+            qrImg.src = imgSrc;
+        });
+    </script>
 @endpush

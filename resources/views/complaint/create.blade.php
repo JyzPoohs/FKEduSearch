@@ -11,8 +11,9 @@
                     </div>
                 @endif
                 <div class="card mb-4">
-                    <div class="card-header pb-0">
+                    <div class="card-header pb-0 d-flex justify-content-between mb-3">
                         <h6>File Complaint</h6>
+                        <a href="{{ route('post.index') }}" class="btn btn-primary col-sm-1">Back</a>
                     </div>
                     <div class="card-body p-3">
                         <form role="form" method="POST" action={{ route('complaint.store') }}
@@ -41,17 +42,20 @@
                                                 {{ old('ref_complaint_type_id') === '12' ? 'selected' : '' }}>Wrongly
                                                 Assigned Research Area</option>
                                             <option value="13"
-                                                {{ old('ref_complaint_type_id') === '13' ? 'selected' : '' }}>Inapproriate
-                                                Feedback
-                                            </option>
+                                                {{ old('ref_complaint_type_id') === '13' ? 'selected' : '' }}>Inappropriate
+                                                Feedback</option>
                                         </select>
+                                        @error('ref_complaint_type_id')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Feedback Description<span
                                                 class="text-danger">*</span></label>
-                                        <textarea disabled class="form-control" rows="2">{{ $post->answer }}</textarea>
+                                        <textarea disabled class="form-control" rows="2">{{ $data['answer'] }}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

@@ -10,6 +10,27 @@
                         @include('components.alert')
                     </div>
                 @endif
+                <form action="{{ route('complaint.search') }}" method="GET" class="mb-4">
+                    <div class="input-group">
+                        <div class="form-group col-md-3">
+                            <select class="form-select" name="ref_complaint_type_id">
+                                <option disabled selected>Search by Complaint Type</option>
+                                <option value="11" {{ old('ref_complaint_type_id') === '11' ? 'selected' : '' }}>
+                                    Unsatisfied Expert's Feedback</option>
+                                <option value="12" {{ old('ref_complaint_type_id') === '12' ? 'selected' : '' }}>Wrongly
+                                    Assigned Research Area</option>
+                                <option value="13" {{ old('ref_complaint_type_id') === '13' ? 'selected' : '' }}>
+                                    Inappropriate Feedback</option>
+                            </select>
+                        </div>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button>
+                            <a href="{{ route('complaint.index') }}" class="btn btn-danger"><i class="fa fa-times"></i></a>
+                        </div>
+                    </div>
+                </form>
+
+
                 <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between mb-3">
                         <h6>Complaint List</h6>
