@@ -59,11 +59,21 @@
                             title="Delete Post"
                             onclick="deleteRecord('{{ route('post.destroy', ['post' => $data['id']]) }}')"><i
                                 class="ni ni-fat-delete text-primary text-lg opacity-10"></i></a>
+                        @if ($data->status->code != 3)
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a class="text-danger" href="#" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Complete Post"
+                                onclick="closePost('{{ route('post.close', ['post' => $data['id']]) }}')"><i
+                                    class="ni ni-check-bold text-primary text-lg opacity-10"></i></a>
+                        @endif
+                    @endif
+                    @if ($data->status->code == 3 && !$data->feedback)
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a class="text-danger" href="#" data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="Complete Post"
-                            onclick="closePost('{{ route('post.close', ['post' => $data['id']]) }}')"><i
-                                class="ni ni-check-bold text-primary text-lg opacity-10"></i></a>
+                        <div data-bs-toggle="tooltip" data-bs-placement="top" title="Give Feedback">
+                            <a data-bs-toggle="modal" data-bs-target="#modal-form"><i
+                                    class="ni ni-like-2 text-primary text-lg opacity-10"></i></a>
+                        </div>
+                        @include('module2._feedback')
                     @endif
                 </div>
                 <div class="collapse mb-3" id="collapseComment-{{ $data['id'] }}">
