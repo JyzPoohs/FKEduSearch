@@ -186,16 +186,11 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'post-status',
                 'code' => 2,
-                'value' => 'Accepted',
-            ],
-            [
-                'name' => 'post-status',
-                'code' => 3,
                 'value' => 'Revised',
             ],
             [
                 'name' => 'post-status',
-                'code' => 4,
+                'code' => 3,
                 'value' => 'Completed',
             ],
             //roles

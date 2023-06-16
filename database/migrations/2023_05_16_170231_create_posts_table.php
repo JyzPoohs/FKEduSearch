@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('description');
             $table->foreignId('accepted_by')->nullable();
             $table->text('answer')->nullable();
-            $table->foreignId('ref_post_status_id')->default(1);
+            $table->foreignId('ref_post_status_id');
             $table->timestamps();
         });
     }

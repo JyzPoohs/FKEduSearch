@@ -36,11 +36,6 @@
             </div>
         </div>
     </div>
-    @if (session()->has('success'))
-        <div id="alert">
-            @include('components.alert')
-        </div>
-    @endif
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-md-8">
@@ -172,6 +167,111 @@
                 </div>
             </div>
         </div>
+        <div class="card mb-4 mt-3">
+            <div class="card-header pb-0 d-flex justify-content-between">
+                <h5>My Posts</h5>
+            </div>
+            <div class="card-body p-3">
+                @include('module2._post')
+            </div>
+        </div>
         @include('layouts.footers.auth.footer')
     </div>
 @endsection
+@push('js')
+    <script>
+        function deleteRecord(url) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#000080',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+                preConfirm: (input) => {
+                    return fetch(url, {
+                            method: 'DELETE',
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                _token: "{{ csrf_token() }}"
+                            })
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(response.statusText)
+                            }
+                            return response.json()
+                        })
+                        .catch(error => {
+                            Swal.showValidationMessage(
+                                `Request failed: ${error}`
+                            )
+                        })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Deleted!',
+                        'The post has been deleted.',
+                        'success'
+                    )
+                    setTimeout(() => {
+                        document.location.reload();
+                    }, 2000);
+                }
+            })
+        }
+
+        function closePost(url) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#000080',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes',
+                preConfirm: (input) => {
+                    return fetch(url, {
+                            method: 'DELETE',
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                _token: "{{ csrf_token() }}"
+                            })
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(response.statusText)
+                            }
+                            return response.json()
+                        })
+                        .catch(error => {
+                            Swal.showValidationMessage(
+                                `Request failed: ${error}`
+                            )
+                        })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Deleted!',
+                        'The post has been closed.',
+                        'success'
+                    )
+                    setTimeout(() => {
+                        document.location.reload();
+                    }, 2000);
+                }
+            })
+        }
+    </script>
+@endpush

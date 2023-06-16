@@ -32,7 +32,7 @@
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Email <span
                                                 class="text-danger">*</span></label>
-                                        <input class="form-control" type="email" name="name"
+                                        <input class="form-control" type="email" name="email"
                                             value="{{ $data->email }}" required>
                                     </div>
                                 </div>

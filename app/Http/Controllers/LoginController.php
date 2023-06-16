@@ -32,7 +32,6 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             $user = User::where('email', $request->email)->first();
-            #dd($user);
             $current = Carbon::now();
             $user->timestamps = false;
             $user->last_login = $current;
@@ -42,7 +41,7 @@ class LoginController extends Controller
             if (Auth::user()->role->value == 'user') {
                 return redirect()->route('user.profile');
             } else if (Auth::user()->role->value == 'expert') {
-                return redirect()->intended('dashboard');
+                return redirect()->route('expert.profile');
             } else {
                 return redirect()->intended('dashboard');
             }

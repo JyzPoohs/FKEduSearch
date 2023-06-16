@@ -84,6 +84,23 @@
                                             value="{{ old('current_academic_status', auth()->user()->current_academic_status) }}">
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Field Category</label>
+                                        <select class="form-select" name="ref_category_id">
+                                            <option>Select Category</option>
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}">{{ $category->value }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">CV Upload</label>
+                                        <input class="form-control" type="file" name="cv">
+                                    </div>
+                                </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Area Of Research</label>
@@ -137,34 +154,6 @@
                             <div class="col-4 text-end">
                                 <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
                                     <i class="ni ni-single-copy-04 text-lg opacity-10" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body p-3">
-                        <div class="row">
-                            <div class="col-9">
-                                <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Likes</p>
-                                    <h5 class="font-weight-bolder">
-                                        {{ auth()->user()->likes->count() }}
-                                    </h5>
-                                    <p class="mb-0">
-                                        @if (auth()->user()->likes->count() > 0)
-                                            Recent likes received on
-                                            <span
-                                                class="text-primary text-sm font-weight-bolder">{{ auth()->user()->likes->last()->created_at }}</span>
-                                        @else
-                                            No likes received yet.
-                                        @endif
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-3 text-end">
-                                <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                                    <i class="ni ni-favourite-28 text-lg opacity-10" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>

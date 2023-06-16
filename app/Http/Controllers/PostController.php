@@ -20,12 +20,29 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->merge([
-            'user_id' => auth()->user()->id
+            'user_id' => auth()->user()->id,
+            'ref_post_status_id' => Reference::where('name', 'post-status')->where('code', 1)->first()->id,
         ]);
 
         Post::create($request->all());
 
         return redirect()->route('post.index')
             ->with('success', "Post Successfully Posted!");
+    }
+
+    public function destroy($id)
+    {
+        Post::find($id)->delete();
+
+        return response()->json(['success' => true]);
+    }
+
+    public function close($id)
+    {
+        Post::find($id)->update([
+            'ref_post_status_id' => Reference::where('name', 'post-status')->where('code', 3)->first()->id
+        ]);
+
+        return response()->json(['success' => true]);
     }
 }

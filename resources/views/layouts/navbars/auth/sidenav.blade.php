@@ -11,7 +11,7 @@
     <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
-            @if (auth()->user()->ref_role_id == 8)
+            @if (auth()->user()->role->code == 1)
                 {{-- User menu --}}
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">User Menu</h6>
@@ -46,7 +46,7 @@
                         <span class="nav-link-text ms-1">Complaint Record</span>
                     </a>
                 </li>
-            @elseif(auth()->user()->ref_role_id == 9)
+            @elseif(auth()->user()->role->code == 2)
                 {{-- Expert menu --}}
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Expert Menu</h6>
@@ -61,16 +61,18 @@
                         <span class="nav-link-text ms-1">Profile</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ Route::currentRouteName() == 'expert.index' ? 'active' : '' }}"
-                        href="{{ route('expert.index') }}">
-                        <div
-                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-archive-2 text-primary text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Discussion Board</span>
-                    </a>
-                </li>
+                @if (auth()->user()->is_approved == 1)
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::currentRouteName() == 'expert.index' ? 'active' : '' }}"
+                            href="{{ route('expert.index') }}">
+                            <div
+                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="ni ni-archive-2 text-primary text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Discussion Board</span>
+                        </a>
+                    </li>
+                @endif
             @else
                 {{-- Admin menu --}}
                 <li class="nav-item mt-3">

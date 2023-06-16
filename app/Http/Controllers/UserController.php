@@ -17,9 +17,7 @@ class UserController extends Controller
         $totalUser = User::where('ref_role_id', Reference::where('name', 'roles')->where('code', 1)->first()->id)->count();
         $totalExpert = User::where('ref_role_id', Reference::where('name', 'roles')->where('code', 2)->first()->id)->count();
         $totalAdmin = User::where('ref_role_id', Reference::where('name', 'roles')->where('code', 3)->first()->id)->count();
-        $totalActiveUser = User::where('ref_role_id', Reference::where('name', 'roles')->where('code', 3)->first()->id)
-            ->where('is_approved', 1)
-            ->count();
+        $totalActiveUser = User::where('is_approved', 1)->count();
 
         return view('module1.manage', compact('datas', 'totalUser', 'totalExpert', 'totalAdmin', 'totalActiveUser'));
     }
@@ -68,9 +66,12 @@ class UserController extends Controller
 
     public function profile()
     {
+        $datas = Post::with(['user', 'expert', 'category', 'likes'])->where('user_id', auth()->user()->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
         $user = User::find(auth()->user()->id);
 
-        return view('module2.user-profile-edit', compact('user'));
+        return view('module2.user-profile-edit', compact('user', 'datas'));
     }
 
     public function profileView($id)

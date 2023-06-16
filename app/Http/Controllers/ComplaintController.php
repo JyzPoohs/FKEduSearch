@@ -23,13 +23,11 @@ class ComplaintController extends Controller
         }
     }
 
-    public function create()
+    public function create(Request $request)
     {
-
-        $datas = Complaint::with(['user', 'post', 'type', 'status'])->find(auth()->user()->id);
-
-        //dd($datas);
-        return view('complaint.create', compact('datas'));
+        // $datas = Complaint::with(['user', 'post', 'type', 'status'])->find(auth()->user()->id);
+        $post = Post::find($request->post_id);
+        return view('complaint.create', compact('post'));
     }
 
     public function store(Request $request)

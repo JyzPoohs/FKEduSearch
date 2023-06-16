@@ -48,12 +48,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/user/profile-update', [UserController::class, 'profileUpdate'])->name('user.profile-update');
     Route::get('/user/report', [UserController::class, 'report'])->name('user.report');
 
+    //post
+    Route::get('/post/close/{post}', [PostController::class, 'close'])->name('post.close');
+
     //complaint
     Route::get('/complaints/report', [ComplaintController::class, 'report'])->name('complaint.report');
 
     //expert
     Route::post('/expert/answer', [ExpertController::class, 'answerQuestion'])->name('expert.answer-question');
     Route::get('/expert/profile', [ExpertController::class, 'profile'])->name('expert.profile');
+    Route::get('/expert/profile/{id}', [ExpertController::class, 'profileView'])->name('expert.profile-view');
 
     //others
     Route::get('/dashboard', [HomeController::class, 'index'])->name('home');

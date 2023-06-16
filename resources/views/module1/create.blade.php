@@ -24,7 +24,7 @@
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Email <span
                                                 class="text-danger">*</span></label>
-                                        <input class="form-control" type="email" name="name" required>
+                                        <input class="form-control" type="email" name="email" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
