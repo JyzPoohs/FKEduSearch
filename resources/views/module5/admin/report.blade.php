@@ -91,6 +91,24 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-xl-12 col-md-12">
+                <div class="card h-100">
+                    <div class="card-body p-3 d-flex flex-column justify-content-between">
+                        <div class="row">
+                            <div class="col-md-12 d-flex justify-content-center">
+                                <canvas style="max-width: 300px; max-height: 300px" id="complaintStatusChart"></canvas>
+                                <canvas style="max-width: 300px; max-height: 300px; margin-left:50px"
+                                    id="complaintsChart"></canvas>
+                            </div>
+                        </div>
+                       
+                    </div>
+                     <!-- Display the number of unresolved complaints -->
+                     <p class="text-danger p-3">Total Unresolved Complaints: {{ $report['Unresolved Complaints'] }}</p>
+                </div>
+            </div>
+        </div>
         <div class="row mt-4">
             <div class="col-lg-12 mb-lg-0 mb-4">
                 @if (session()->has('success'))
@@ -185,18 +203,10 @@
                         </div>
                     </div>
                 </div>
-                <!-- Display the number of unresolved complaints -->
-                <p class="text-danger">Total Unresolved Complaints: {{ $report['Unresolved Complaints'] }}</p>
+
             </div>
         </div>
-        <div class="row mt-3 justify-content-center">
-            <div class="col-md-3">
-                <canvas id="complaintStatusChart"></canvas>
-            </div>
-            <div class="col-md-5">
-                <canvas id="complaintsChart"></canvas>
-            </div>
-        </div>
+
     </div>
     @include('layouts.footers.auth.footer')
 @endsection

@@ -23,18 +23,11 @@ class ComplaintController extends Controller
         }
     }
 
+    //To display file complaint form
     public function create(Request $request)
     {
         $post = Post::find($request->post_id);
         return view('complaint.create', compact('post'));
-    }
-
-    //To display file complaint form
-    public function file($id)
-    {
-        $data = Post::with(['user', 'expert', 'category', 'likes'])->where('id', $id)->first();
-
-        return view('complaint.create', compact('data'));
     }
 
     //Store user file complaint record
@@ -52,7 +45,7 @@ class ComplaintController extends Controller
         $request->merge([
             'post_id' => $request->post_id,
             'user_id' => auth()->user()->id,
-            'ref_complaint_status_id' => '15',
+            'ref_complaint_status_id' => '14',
         ]);
 
         Complaint::create($request->all());
@@ -81,6 +74,7 @@ class ComplaintController extends Controller
     //To update edited complaint info
     public function update(Request $request, $complaint)
     {
+       // dd($request);
         Complaint::find($complaint)->update($request->all());
 
         return redirect()->route('complaint.index')
@@ -106,14 +100,14 @@ class ComplaintController extends Controller
         $timeRange = Carbon::now()->subDays(30);
 
         # Calculate complaint type KPI metrics
-        $unsatisfiedComplaints = $complaints->where('ref_complaint_type_id', 11)->count();
-        $wrongAssignedComplaints = $complaints->where('ref_complaint_type_id', 12)->count();
-        $inappropriateComplaints = $complaints->where('ref_complaint_type_id', 13)->count();
+        $unsatisfiedComplaints = $complaints->where('ref_complaint_type_id', 10)->count();
+        $wrongAssignedComplaints = $complaints->where('ref_complaint_type_id', 11)->count();
+        $inappropriateComplaints = $complaints->where('ref_complaint_type_id', 12)->count();
 
         #Calculate complaint status KPI metrics
-        $investigateComplaints = $complaints->where('ref_complaint_status_id', '14')->count();
-        $holdComplaints = $complaints->where('ref_complaint_status_id', '15')->count();
-        $resolvedComplaints = $complaints->where('ref_complaint_status_id', '16')->count();
+        $investigateComplaints = $complaints->where('ref_complaint_status_id', '13')->count();
+        $holdComplaints = $complaints->where('ref_complaint_status_id', '14')->count();
+        $resolvedComplaints = $complaints->where('ref_complaint_status_id', '15')->count();
 
         #Calculate total complaints that havent solved
         $unresolvedComplaints = $totalComplaints - $resolvedComplaints;

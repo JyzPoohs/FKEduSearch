@@ -35,14 +35,14 @@
                                                 class="text-danger">*</span></label>
                                         <select class="form-select" name="ref_complaint_type_id">
                                             <option disabled selected>Select Complaint Type</option>
-                                            <option value="11"
-                                                {{ old('ref_complaint_type_id') === '11' ? 'selected' : '' }}>Unsatisfied
+                                            <option value="10"
+                                                {{ old('ref_complaint_type_id') === '10' ? 'selected' : '' }}>Unsatisfied
                                                 Expert's Feedback</option>
-                                            <option value="12"
-                                                {{ old('ref_complaint_type_id') === '12' ? 'selected' : '' }}>Wrongly
+                                            <option value="11"
+                                                {{ old('ref_complaint_type_id') === '11' ? 'selected' : '' }}>Wrongly
                                                 Assigned Research Area</option>
-                                            <option value="13"
-                                                {{ old('ref_complaint_type_id') === '13' ? 'selected' : '' }}>Inappropriate
+                                            <option value="12"
+                                                {{ old('ref_complaint_type_id') === '12' ? 'selected' : '' }}>Inappropriate
                                                 Feedback</option>
                                         </select>
                                         @error('ref_complaint_type_id')

@@ -15,15 +15,15 @@
                         <div class="form-group col-md-3">
                             <select class="form-select" name="ref_complaint_type_id">
                                 <option disabled selected>Search by Complaint Type</option>
-                                <option value="11" {{ old('ref_complaint_type_id') === '11' ? 'selected' : '' }}>
+                                <option value="10" {{ old('ref_complaint_type_id') === '10' ? 'selected' : '' }}>
                                     Unsatisfied Expert's Feedback</option>
-                                <option value="12" {{ old('ref_complaint_type_id') === '12' ? 'selected' : '' }}>Wrongly
+                                <option value="11" {{ old('ref_complaint_type_id') === '11' ? 'selected' : '' }}>Wrongly
                                     Assigned Research Area</option>
-                                <option value="13" {{ old('ref_complaint_type_id') === '13' ? 'selected' : '' }}>
+                                <option value="12" {{ old('ref_complaint_type_id') === '12' ? 'selected' : '' }}>
                                     Inappropriate Feedback</option>
                             </select>
                         </div>
-                        <div class="input-group-append">
+                        <div>
                             <button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button>
                             <a href="{{ route('complaint.index') }}" class="btn btn-danger"><i class="fa fa-times"></i></a>
                         </div>

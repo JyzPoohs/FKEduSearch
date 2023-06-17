@@ -53,7 +53,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/post/close/{post}', [PostController::class, 'close'])->name('post.close');
 
     //complaint
-    Route::get('/complaints/file/{id}', [ComplaintController::class, 'file'])->name('complaint.file');
     Route::get('/complaints/report', [ComplaintController::class, 'report'])->name('complaint.report');
     Route::get('/complaint/search', [ComplaintController::class, 'search'])->name('complaint.search');
 
