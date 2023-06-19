@@ -13,14 +13,21 @@
                 <div class="card mb-4">
                     <div class="card-header pb-0 d-flex justify-content-between">
                         <h5>Discussion Board</h5>
-                        @if (auth()->user()->is_approved == 1)
-                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                Add new post
+                        <div>
+                            @if (auth()->user()->is_approved == 1)
+                                <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    Add new post
+                                </button>
+                            @endif
+                            <button class="btn btn-success" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter">
+                                Filter
                             </button>
-                        @endif
+                        </div>
                     </div>
                     <div class="card-body p-3">
+                        {{-- create post --}}
                         <div class="collapse mb-3" id="collapseExample">
                             <div class="card card-frame card-body">
                                 <form role="form" method="POST" action={{ route('post.store') }}
@@ -55,6 +62,37 @@
                                     </div>
                                     <div class="text-end mt-2">
                                         <button class="btn btn-primary btn-md ms-auto">Post</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        {{-- filter post --}}
+                        <div class="collapse mb-3" id="collapseFilter">
+                            <div class="card card-frame card-body">
+                                <form role="form" action="">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="example-text-input" class="form-control-label">Title</label>
+                                                <input class="form-control" type="text" name="title"
+                                                    value="{{ $title_search }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="example-text-input" class="form-control-label">Category</label>
+                                                <select class="form-select" name="ref_category_id">
+                                                    <option value="">Select Category</option>
+                                                    @foreach ($categories as $category)
+                                                        <option @if ($selected_category == $category->id) selected @endif
+                                                            value="{{ $category->id }}">{{ $category->value }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-end mt-2">
+                                        <button class="btn btn-success btn-md ms-auto">Filter</button>
                                     </div>
                                 </form>
                             </div>

@@ -8,13 +8,22 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $datas = Post::with(['user', 'expert', 'category', 'likes'])->orderBy('created_at', 'desc')->get();
-
         $categories = Reference::where('name', 'category')->orderBy('code')->get();
+        $title_search = ($request->has('title')) ? $request->title : null;
+        $selected_category = ($request->has('ref_category_id')) ? $request->ref_category_id : null;
 
-        return view('module2.discussion-board', compact('datas', 'categories'));
+        $datas = Post::with(['user', 'expert', 'category', 'likes'])
+            ->when($title_search != null, function ($query) use ($title_search) {
+                $query->where('title', 'like', '%' . $title_search . '%');
+            })
+            ->when($selected_category != null, function ($query) use ($selected_category) {
+                $query->where('ref_category_id', $selected_category);
+            })
+            ->orderBy('created_at', 'desc')->get();
+
+        return view('module2.discussion-board', compact('datas', 'categories', 'title_search', 'selected_category'));
     }
 
     public function store(Request $request)
