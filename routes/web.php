@@ -14,6 +14,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\ExpertController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\URL;
 
@@ -76,6 +77,7 @@ Route::group(['middleware' => 'auth'], function () {
         'report' => ReportController::class,
         'expert' => ExpertController::class,
         'feedback' => FeedbackController::class,
+        'publication' => PublicationController::class,
     ]);
 });
 

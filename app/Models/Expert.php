@@ -35,4 +35,9 @@ class Expert extends Model
     {
         return $this->hasMany(Post::class, 'accepted_by', 'user_id');
     }
+
+    public function publications()
+    {
+        return $this->hasMany(Publication::class);
+    }
 }

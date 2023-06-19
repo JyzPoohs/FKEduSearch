@@ -132,6 +132,34 @@
                         </div>
                     </div>
                 </div>
+                <div class="card mb-3">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Publication</p>
+                                    <h5 class="font-weight-bolder">
+                                        {{ $user->expert->publications->count() }}
+                                    </h5>
+                                    <p class="mb-0">
+                                        @if ($user->posts->count() > 0)
+                                            Last publication added on
+                                            <span
+                                                class="text-primary text-sm font-weight-bolder">{{ $user->publications->last()->created_at }}.</span>
+                                        @else
+                                            No publication added yet.
+                                        @endif
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                                    <i class="ni ni-book-bookmark text-lg opacity-10" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         @include('layouts.footers.auth.footer')
