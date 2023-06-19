@@ -9,8 +9,12 @@
                     <div class="avatar avatar-xl position-relative">
                         <div>
                             <span class="h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                                <img src="https://argon-dashboard-pro-laravel.creative-tim.com/avatars/team-1.jpg"
-                                    alt="bruce" class="w-100 border-radius-lg shadow-sm">
+                                @php
+                                    $default = 'https://argon-dashboard-pro-laravel.creative-tim.com/avatars/team-1.jpg';
+                                    $img = $user->avatar != null ? env('APP_URL') . '/uploads/' . $user->avatar : $default;
+                                @endphp
+                                <img src="{{ $img }}" alt="avatar" class="w-100 border-radius-lg shadow-sm"
+                                    id="avatar">
                             </span>
                         </div>
                     </div>

@@ -94,6 +94,16 @@ class UserController extends Controller
     {
         $user = User::find(auth()->user()->id);
 
+        $destinationPath = 'uploads';
+        if ($request->hasFile('avatar_upload')) {
+            $avatarFile = $request->file('avatar_upload');
+            $avatarPath = $avatarFile->getClientOriginalName();
+            $avatarFile->move($destinationPath, $avatarPath);
+            $request->merge([
+                'avatar' => $avatarPath ?? "",
+            ]);
+        }
+
         $user->update($request->all());
 
         return redirect()->back()->with('success', "Profile Successfully Updated!");

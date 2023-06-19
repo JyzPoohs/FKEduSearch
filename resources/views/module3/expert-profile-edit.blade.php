@@ -15,8 +15,12 @@
                                 <span class="sr-only">Edit Image</span>
                             </label>
                             <span class="h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                                <img src="https://argon-dashboard-pro-laravel.creative-tim.com/avatars/team-1.jpg"
-                                    alt="bruce" class="w-100 border-radius-lg shadow-sm">
+                                @php
+                                    $default = 'https://argon-dashboard-pro-laravel.creative-tim.com/avatars/team-1.jpg';
+                                    $img = auth()->user()->avatar != null ? env('APP_URL') . '/uploads/' . auth()->user()->avatar : $default;
+                                @endphp
+                                <img src="{{ $img }}" alt="avatar" class="w-100 border-radius-lg shadow-sm"
+                                    id="avatar">
                             </span>
                         </div>
                     </div>
@@ -48,7 +52,7 @@
                     <form role="form" method="POST" action={{ route('user.profile-update') }}
                         enctype="multipart/form-data">
                         @csrf
-                        <input type="file" name="avatar" id="file-input" accept="image/*" class="d-none">
+                        <input type="file" name="avatar_upload" id="file-input" accept="image/*" class="d-none">
                         <div class="card-header pb-0">
                             <div class="d-flex align-items-center">
                                 <p class="mb-0">Edit Profile</p>
@@ -192,3 +196,22 @@
         @include('layouts.footers.auth.footer')
     </div>
 @endsection
+@push('js')
+    <script>
+        var readURL = function(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#avatar').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#file-input").on('change', function() {
+            readURL(this);
+        });
+    </script>
+@endpush
