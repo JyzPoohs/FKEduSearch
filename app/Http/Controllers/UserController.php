@@ -104,6 +104,19 @@ class UserController extends Controller
             ]);
         }
 
+        if ($request->has('expert')) {
+            $expert = collect($request->expert);
+            if ($request->hasFile('cv')) {
+                $cvFile = $request->file('cv');
+                $cvPath = $cvFile->getClientOriginalName();
+                $cvFile->move($destinationPath, $cvPath);
+                $expert = $expert->merge([
+                    'cv_upload' => $cvPath ?? "",
+                ]);
+            }
+            $user->expert->update($expert->toArray());
+        }
+
         $user->update($request->all());
 
         return redirect()->back()->with('success', "Profile Successfully Updated!");

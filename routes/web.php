@@ -16,6 +16,7 @@ use App\Http\Controllers\ExpertController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\URL;
 
 /*
@@ -61,6 +62,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/expert/answer', [ExpertController::class, 'answerQuestion'])->name('expert.answer-question');
     Route::get('/expert/profile', [ExpertController::class, 'profile'])->name('expert.profile');
     Route::get('/expert/profile/{id}', [ExpertController::class, 'profileView'])->name('expert.profile-view');
+
+    //upload
+    Route::get('/upload/download/{filename}', [UploadController::class, 'downloadFile'])->name('upload.download-file');
 
     //others
     Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
