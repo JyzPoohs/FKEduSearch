@@ -114,10 +114,10 @@
                                         {{ $user->expert->answeredPosts->count() }}
                                     </h5>
                                     <p class="mb-0">
-                                        @if ($user->posts->count() > 0)
+                                        @if ($user->expert->answeredPosts->count() > 0)
                                             Last post answered on
                                             <span
-                                                class="text-primary text-sm font-weight-bolder">{{ $user->posts->last()->created_at }}.</span>
+                                                class="text-primary text-sm font-weight-bolder">{{ $user->expert->answeredPosts->last()->created_at }}.</span>
                                         @else
                                             No answered post yet.
                                         @endif
@@ -142,10 +142,10 @@
                                         {{ $user->expert->publications->count() }}
                                     </h5>
                                     <p class="mb-0">
-                                        @if ($user->posts->count() > 0)
+                                        @if ($user->expert->publications->count() > 0)
                                             Last publication added on
                                             <span
-                                                class="text-primary text-sm font-weight-bolder">{{ $user->publications->last()->created_at }}.</span>
+                                                class="text-primary text-sm font-weight-bolder">{{ $user->expert->publications->last()->created_at }}.</span>
                                         @else
                                             No publication added yet.
                                         @endif
@@ -158,6 +158,36 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 mt-3">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <div class="d-flex align-items-center">
+                            <p class="mb-0">Publications</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @foreach ($user->expert->publications as $publication)
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Title</label>
+                                        <br>
+                                        <span class="text-bold text-sm ms-1">{{ $publication->title ?? '-' }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Description</label>
+                                        <br>
+                                        <span class="text-bold text-sm ms-1">{{ $publication->description ?? '-' }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="horizontal dark">
+                        @endforeach
                     </div>
                 </div>
             </div>

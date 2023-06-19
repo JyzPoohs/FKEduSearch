@@ -28,7 +28,8 @@
                             <h6>Answer</h6>
                             <small class="mb-0 text-small text-bold">
                                 @if ($data->status->code == 2)
-                                    <a href="{{ route('complaint.create', ['post_id' => $data->id]) }}">
+                                    <a href="{{ route('complaint.create', ['post_id' => $data->id]) }}"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Complaint Expert">
                                         <i class="fa fa-flag" aria-hidden="true"></i>
                                     </a>
                                 @endif

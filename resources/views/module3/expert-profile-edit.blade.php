@@ -141,10 +141,10 @@
                                         {{ auth()->user()->expert->answeredPosts->count() }}
                                     </h5>
                                     <p class="mb-0">
-                                        @if (auth()->user()->posts->count() > 0)
+                                        @if (auth()->user()->expert->answeredPosts->count() > 0)
                                             Last post answered on
                                             <span
-                                                class="text-primary text-sm font-weight-bolder">{{ auth()->user()->posts->last()->created_at }}.</span>
+                                                class="text-primary text-sm font-weight-bolder">{{ auth()->user()->expert->answeredPosts->last()->created_at }}.</span>
                                         @else
                                             No answered post yet.
                                         @endif
@@ -169,10 +169,10 @@
                                         {{ auth()->user()->expert->publications->count() }}
                                     </h5>
                                     <p class="mb-0">
-                                        @if (auth()->user()->posts->count() > 0)
+                                        @if (auth()->user()->expert->publications->count() > 0)
                                             Last publication added on
                                             <span
-                                                class="text-primary text-sm font-weight-bolder">{{ auth()->user()->publications->last()->created_at }}.</span>
+                                                class="text-primary text-sm font-weight-bolder">{{ auth()->user()->expert->publications->last()->created_at }}.</span>
                                         @else
                                             No publication added yet.
                                         @endif
