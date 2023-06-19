@@ -59,7 +59,7 @@
                             title="Delete Post"
                             onclick="deleteRecord('{{ route('post.destroy', ['post' => $data['id']]) }}')"><i
                                 class="ni ni-fat-delete text-primary text-lg opacity-10"></i></a>
-                        @if ($data->status->code != 3)
+                        @if ($data->status->code == 2)
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <a class="text-danger" href="#" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Complete Post"
