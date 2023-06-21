@@ -32,7 +32,13 @@ class HomeController extends Controller
         $complaints = Complaint::count();
         $reports = Report::count();
         $posts = Post::count();
-        return view('pages.dashboard', compact('categories', 'users', 'complaints', 'reports', 'posts'));
+
+        $values = [];
+        $values['database'] = Post::where('ref_category_id', 1)->count();
+        $values['networking'] = Post::where('ref_category_id', 2)->count();
+        $values['web'] = Post::where('ref_category_id', 3)->count();
+
+        return view('pages.dashboard', compact('categories', 'users', 'complaints', 'reports', 'posts', 'values'));
     }
 
     public function formExample()

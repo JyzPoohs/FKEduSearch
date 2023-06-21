@@ -67,7 +67,7 @@
                                 <div class="text-end mt-2">
                                     <button class="btn btn-success btn-md ms-auto w-10"
                                         onclick="return confirm('Confirm to submit complaint?')">Submit</button>
-                                    <a href="{{ route('post.index') }}" class="btn btn-secondary btn-md ms-auto">Back</a>
+                                    {{-- <a href="{{ route('post.index') }}" class="btn btn-secondary btn-md ms-auto">Back</a> --}}
                                     <button class="btn btn-danger btn-md ms-auto" type="reset">Clear</button>
                                 </div>
                         </form>

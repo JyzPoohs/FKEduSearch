@@ -13,7 +13,6 @@ class Expert extends Model
         'user_id',
         'ref_category_id',
         'cv_upload',
-        'ref_expert_status',
     ];
 
     public function user()

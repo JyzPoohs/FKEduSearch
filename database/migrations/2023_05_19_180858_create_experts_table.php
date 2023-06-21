@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('ref_category_id')->nullable();
             $table->string('cv_upload')->nullable();
-            $table->foreignId('ref_expert_status');
             $table->timestamps();
         });
     }

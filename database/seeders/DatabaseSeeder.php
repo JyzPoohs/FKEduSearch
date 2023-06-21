@@ -61,7 +61,6 @@ class DatabaseSeeder extends Seeder
             if ($user->role->value == 'expert') {
                 Expert::create([
                     'user_id' => $user->id,
-                    'ref_expert_status' => Reference::where('name', 'expert-status')->where('code', 1)->first()->id,
                 ]);
             }
         }

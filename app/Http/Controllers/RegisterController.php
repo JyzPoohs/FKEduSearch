@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 // use App\Http\Requests\RegisterRequest;
 
+use App\Models\Expert;
 use App\Models\Reference;
 use App\Models\User;
 
@@ -29,8 +30,20 @@ class RegisterController extends Controller
         ]);
 
         $user = User::create($attributes);
+
+        if ($user->role->code == 2) {
+            Expert::create([
+                'user_id' => $user->id,
+            ]);
+        }
         auth()->login($user);
 
-        return redirect('/dashboard');
+        if ($user->role->code == 1) {
+            return redirect()->route('user.profile');
+        } else if ($user->role->code == 2) {
+            return redirect()->route('expert.profile');
+        } else {
+            return redirect()->intended('dashboard');
+        }
     }
 }

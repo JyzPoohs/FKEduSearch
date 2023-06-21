@@ -92,7 +92,7 @@
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Field Category</label>
                                         <select class="form-select" name="expert[ref_category_id]">
-                                            <option>Select Category</option>
+                                            <option value="">Select Category</option>
                                             @foreach ($categories as $category)
                                                 <option @if (auth()->user()->expert->ref_category_id == $category->id) selected @endif
                                                     value="{{ $category->id }}">{{ $category->value }}</option>
